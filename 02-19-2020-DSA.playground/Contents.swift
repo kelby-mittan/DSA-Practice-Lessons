@@ -291,3 +291,28 @@ func shiftZeros(_ arr: [Int]) -> ([Int], Int) {
 shiftZeros([3,0,2,0,0,1,0,4])
 
 print(shiftZeros([3,0,2,0,0,1,0,4]))
+
+func romanToInt(_ str: String) -> Int {
+    var res = 0
+    let dict: [Character : Int] =
+        ["I" : 1, "V" : 5, "X" : 10, "L" : 50, "C" : 100, "D" : 500, "M" : 1000]
+    
+    var strArr = [Character]()
+    
+    for char in str {
+        strArr.append(char)
+        strArr = strArr.reversed()
+    }
+    
+    for i in 0..<strArr.count {
+        
+        if i - 1 >= 0 , dict[strArr[i]]! > dict[strArr[i - 1]]! {
+            res += dict[strArr[i]]! - (2 * dict[strArr[i - 1]]!)
+        } else {
+            res += dict[strArr[i]]!
+        }
+    }
+    return res
+}
+
+romanToInt("LX")
