@@ -33,10 +33,6 @@ func romanToInt(_ str: String) -> Int {
 
     for i in 0..<strArr.count {
         
-        print(prev)
-        print(dict[strArr[i]]!)
-        print(result)
-        print(strArr)
         if prev >= dict[strArr[i]]! {
             result += dict[strArr[i]]!
         } else {
@@ -48,4 +44,12 @@ func romanToInt(_ str: String) -> Int {
     return result
 }
 
-romanToInt("IV")
+romanToInt("XIX")
+
+
+func findNumbers(_ nums: [Int]) -> Int {
+    
+    
+    
+    return 0
+}
