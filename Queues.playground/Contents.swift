@@ -25,6 +25,13 @@ struct Queue<T> {
         guard !isEmpty else { return nil }
         return elements.removeFirst()
     }
+    
+    public mutating func pop() -> T? {
+        guard !elements.isEmpty else {
+            return nil
+        }
+        return elements.removeLast() // O(1)
+    }
 }
 
 var queue = Queue<String>()
@@ -126,11 +133,92 @@ isSorted(q: queueInt)
  Sample Output:  (Back) 31 - 2 - 16 - 9 (Front)
  */
 
-func reversed<T>(q: Queue<T>) -> Queue<T> {
-    return q
+//struct Stack<T: Equatable>: Equatable {
+//    private var elements = [T]()
+//
+//    static func ==(lhs: Stack, rhs: Stack) -> Bool {
+//        return lhs.elements == rhs.elements
+//    }
+//
+//    public var peek: T? {
+//        return elements.last
+//    }
+//
+//    public var count: Int {
+//        return elements.count
+//    }
+//
+//    public var isEmpty: Bool {
+//        return elements.isEmpty
+//    }
+//
+//    // add to the top of the stack (end)
+//    public mutating func push(_ value: T) {
+//        elements.append(value) // O(1)
+//
+//    }
+//
+//    // remove from the top of the stack
+//    public mutating func pop() -> T? {
+//        guard !elements.isEmpty else {
+//            return nil
+//        }
+//        return elements.removeLast() // O(1)
+//    }
+//
+//}
+
+func reversed<T: Equatable>(q: Queue<T>) -> Queue<T> {
+    var qCopy = q
+    var qResult = Queue<T>()
+//    var qStack = Stack<T>()
+    while !qCopy.isEmpty {
+        guard let popped = qCopy.pop() else {
+            return qResult
+        }
+        qResult.enqueue(popped)
+    }
+    print(qResult)
+    return qResult
 }
+
+var queueB4 = Queue<Int>()
+
+queueB4.enqueue(9)
+queueB4.enqueue(16)
+queueB4.enqueue(2)
+queueB4.enqueue(31)
+reversed(q: queueB4)
 
 //5 Determine if two Queues are equal
 func areEqual<T: Equatable>(qOne: Queue<T>, qTwo: Queue<T>) -> Bool {
-    return false
+    var qOneV = qOne
+    var qTwoV = qTwo
+    guard qOne.count == qTwo.count else { return false }
+    var isEqual = Bool()
+    while !qOneV.isEmpty && !qTwoV.isEmpty {
+        guard let qOneDQ = qOneV.dequeue() else { return false }
+        guard let qTwoDQ = qTwoV.dequeue() else { return false }
+        if qOneDQ == qTwoDQ {
+            isEqual = true
+        } else {
+            isEqual = false
+            break
+        }
+    }
+    return isEqual
 }
+
+var queue1 = Queue<Int>()
+queue1.enqueue(9)
+queue1.enqueue(16)
+queue1.enqueue(2)
+queue1.enqueue(31)
+
+var queue2 = Queue<Int>()
+queue2.enqueue(9)
+queue2.enqueue(16)
+queue2.enqueue(2)
+queue2.enqueue(31)
+
+areEqual(qOne: queue1, qTwo: queue2)
