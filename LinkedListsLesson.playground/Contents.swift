@@ -177,13 +177,31 @@ extension Node {
         }
         return slowPart
     }
+    
+    public func nodeAtN(node: Node?, index: Int) -> Node? {
+        
+        var current = node
+        var count = 0
+        
+        while current != nil {
+            
+            if count == index {
+                break
+            }
+            current = current?.next
+            count += 1
+        }
+        print(current!.value)
+        return current
+    }
 }
 //let revList = car12.reverse(list: car12)
 //print(revList!)
 //let recRevList = car12.recReverse(list: car12)
 //print(recRevList!)
 print(car12)
-print(car12.middleNode(node: car12)!)
+//print(car12.middleNode(node: car12)!)
+//car12.nodeAtN(node: car12, index: 2)
 
 
 
