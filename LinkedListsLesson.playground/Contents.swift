@@ -151,9 +151,22 @@ extension Node {
             }
             return previous
         }
+    
+    public func recReverse(list: Node?) -> Node? {
+        guard let list = list else { return nil }
+        guard list.next != nil else { return list }
+
+        let rev = reverse(list: list.next)
+
+        list.next?.next = list
+        list.next = nil
+        return rev
+    }
 }
-let revList = car12.reverse(list: car12)
-print(revList!)
+//let revList = car12.reverse(list: car12)
+//print(revList!)
+let recRevList = car12.recReverse(list: car12)
+print(recRevList!)
 
 
 
