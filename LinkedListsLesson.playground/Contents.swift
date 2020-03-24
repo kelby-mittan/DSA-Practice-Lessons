@@ -37,11 +37,14 @@ extension Node: CustomStringConvertible {
 let car12 = Node<Int>(12)
 let car99 = Node<Int>(99)
 let car37 = Node<Int>(37)
-let car500 = Node<Int>(37)
+let car500 = Node<Int>(500)
+let car44 = Node<Int>(44)
 
 // link our nodes
 car12.next = car99
 car99.next = car37
+car37.next = car500
+car500.next = car44
 
 print(car12)
 
@@ -156,18 +159,31 @@ extension Node {
         guard let list = list else { return nil }
         guard list.next != nil else { return list }
 
-        let rev = reverse(list: list.next)
+        let rev = recReverse(list: list.next)
 
         list.next?.next = list
         list.next = nil
         return rev
     }
+    
+    public func middleNode(node: Node?) -> Node? {
+        
+        var fastPart = node
+        var slowPart = node
+        
+        while fastPart?.next != nil {
+            fastPart = fastPart?.next?.next
+            slowPart = slowPart?.next
+        }
+        return slowPart
+    }
 }
 //let revList = car12.reverse(list: car12)
 //print(revList!)
-let recRevList = car12.recReverse(list: car12)
-print(recRevList!)
-
+//let recRevList = car12.recReverse(list: car12)
+//print(recRevList!)
+print(car12)
+print(car12.middleNode(node: car12)!)
 
 
 
