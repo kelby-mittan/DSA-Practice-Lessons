@@ -22,6 +22,7 @@ func bubbleSort(_ arr: inout [Int]) {
 }
 
 var list = [10,2,-8,4]
-
+// 2,10,-8,4
+// 2,-8,10,4
 bubbleSort(&list)
 

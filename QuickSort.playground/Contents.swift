@@ -7,6 +7,12 @@ import UIKit
 // Quick Sort uses the divide and conquer approach to solve the sorting algorithm , divide and conquer is splitting the problem in half on every iteration (or recursive call)
 // runtime O(n log n)
 
+func sortArray(_ nums: [Int]) -> [Int] {
+    var varArr = nums
+    quicksortLomuto(&varArr, low: 0, high: varArr.count - 1)
+    return varArr
+}
+
 func lomutoPartition(_ arr: inout [Int], low: Int, high: Int) -> Int {
     
     let pivot = arr[high]

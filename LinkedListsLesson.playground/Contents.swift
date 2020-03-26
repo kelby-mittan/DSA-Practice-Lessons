@@ -145,12 +145,23 @@ extension Node {
             var previous: Node?
             var next: Node?
 
+        // 1 - 2 - 3 - 4 - 5
+        // ex 3
+        // current is 3 making next 4
+        // reassign previous from 2 to the current whish is 3
+        // and current.next will = 2
+        
+        // 2 - 1
+        
+        //
             while current != nil {
                 next = current?.next
                 current?.next = previous
                 previous = current
-
                 current = next
+//                print("current: \(current)")
+//                print("previous: \(previous)")
+//                print("next: \(next)")
             }
             return previous
         }
@@ -194,9 +205,10 @@ extension Node {
         print(current!.value)
         return current
     }
+    
 }
-//let revList = car12.reverse(list: car12)
-//print(revList!)
+let revList = car12.reverse(list: car12)
+print(revList!)
 //let recRevList = car12.recReverse(list: car12)
 //print(recRevList!)
 print(car12)
