@@ -67,8 +67,26 @@ let characters = ["a", "b" , "c", "y"]
 let charIndex = binarySearch(characters, searchKey: "y", range: (0..<characters.count))
 print("found char index: \(charIndex ?? -1)")
 
+// [-99, 2, 6, 9, 13, 34, 99, 101]
+// [ 2, 6 ]
 
 func search(_ nums: [Int], _ target: Int) -> Int {
+    var leftIndex = 0
+    var rightIndex = nums.count - 1
     
-    return 0
+    while leftIndex <= rightIndex {
+        let midIndex = (leftIndex + rightIndex) / 2
+        print(nums[midIndex])
+        if target < nums[midIndex] {
+            rightIndex = midIndex - 1
+        } else if target > nums[midIndex] {
+            leftIndex = midIndex + 1
+        } else {
+            return midIndex
+        }
+    }
+    return -1
 }
+
+search(sortedList, 6)
+
