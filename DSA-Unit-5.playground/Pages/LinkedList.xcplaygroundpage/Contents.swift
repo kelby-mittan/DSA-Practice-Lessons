@@ -1,5 +1,6 @@
-import UIKit
+//: [Previous](@previous)
 
+import Foundation
 
 //======================================================================
 //                               LESSON
