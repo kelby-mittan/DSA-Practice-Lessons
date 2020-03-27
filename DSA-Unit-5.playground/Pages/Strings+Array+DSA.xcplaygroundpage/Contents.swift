@@ -126,13 +126,14 @@ func secondLargest(_ arr: [Int]) -> Int {
         if num > largeNum {
             secondLargest = largeNum
             largeNum = num
+        } else if num > secondLargest && num != largeNum {
+            secondLargest = num
         }
     }
     
     return secondLargest
 }
-secondLargest([1, 4, -2, -9, 2, 5, -1, 10, 4])
-
+secondLargest([1,2,3,4,5,10,20,13,14,22])
 
 // Remove Duplicates
 
