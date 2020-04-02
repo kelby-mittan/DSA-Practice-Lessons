@@ -49,6 +49,13 @@ car500.next = car44
 
 print(car12)
 
+extension Node {
+    func printNode(node: Node) {
+        print(node)
+    }
+}
+
+car12.printNode(node: car12)
 
 // Implementation of a LinkedList
 
