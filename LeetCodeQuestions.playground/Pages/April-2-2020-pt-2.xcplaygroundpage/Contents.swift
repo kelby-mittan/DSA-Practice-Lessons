@@ -142,3 +142,51 @@ func numJewelsInStones(_ J: String, _ S: String) -> Int {
 }
 
 numJewelsInStones("aA", "aAAbbbb")
+
+/*
+ 1207. Unique Number of Occurrences
+ Easy
+
+ Given an array of integers arr, write a function that returns true if and only if the number of occurrences of each value in the array is unique.
+
+ Example 1:
+
+ Input: arr = [1,2,2,1,1,3]
+ Output: true
+ Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
+ Example 2:
+
+ Input: arr = [1,2]
+ Output: false
+ Example 3:
+
+ Input: arr = [-3,0,1,-3,1,1,1,-3,10,0]
+ Output: true
+ */
+
+func uniqueOccurrences(_ arr: [Int]) -> Bool {
+    
+    var occDict: [Int:Int] = [:]
+    var occurrences = [Int]()
+    
+    for num in arr {
+        if occDict[num] == nil {
+            occDict[num] = 1
+        } else {
+            occDict[num]! += 1
+        }
+    }
+    for (_, val) in occDict {
+        occurrences.append(val)
+    }
+    let occurrencesSet = Set(occurrences)
+    
+    if occurrencesSet.count == occurrences.count {
+        return true
+    } else {
+        return false
+    }
+}
+
+uniqueOccurrences([-3,0,1,-3,1,1,1,-3,10,0])
+
