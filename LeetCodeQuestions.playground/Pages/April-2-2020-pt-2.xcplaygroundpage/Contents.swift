@@ -190,3 +190,101 @@ func uniqueOccurrences(_ arr: [Int]) -> Bool {
 
 uniqueOccurrences([-3,0,1,-3,1,1,1,-3,10,0])
 
+/*
+ 387. First Unique Character in a String
+ 
+ Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+ Examples:
+
+ s = "leetcode"
+ return 0.
+
+ s = "loveleetcode",
+ return 2.
+ */
+
+func firstUniqChar(_ s: String) -> Int {
+    var occDict = [Character:Int]()
+    for char in s {
+        if occDict[char] == nil {
+            occDict[char] = 1
+        } else {
+            occDict[char]! += 1
+        }
+    }
+    var i = 0
+    for char in s {
+        if occDict[char] == 1 {
+            return i
+        }
+        i += 1
+    }
+    return -1
+}
+
+firstUniqChar("loveleetcode")
+
+/*
+ 451. Sort Characters By Frequency
+ Given a string, sort it in decreasing order based on the frequency of characters.
+
+ Example 1:
+
+ Input:
+ "tree"
+
+ Output:
+ "eert"
+
+ Explanation:
+ 'e' appears twice while 'r' and 't' both appear once.
+ So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer.
+ Example 2:
+
+ Input:
+ "cccaaa"
+
+ Output:
+ "cccaaa"
+
+ Explanation:
+ Both 'c' and 'a' appear three times, so "aaaccc" is also a valid answer.
+ Note that "cacaca" is incorrect, as the same characters must be together.
+ Example 3:
+
+ Input:
+ "Aabb"
+
+ Output:
+ "bbAa"
+
+ Explanation:
+ "bbaA" is also a valid answer, but "Aabb" is incorrect.
+ Note that 'A' and 'a' are treated as two different characters.
+ */
+
+func frequencySort(_ s: String) -> String {
+    var occDict = [Character:Int]()
+    let sArr = Array(s)    
+    for char in sArr {
+        if occDict[char] == nil {
+            occDict[char] = 1
+        } else {
+            occDict[char]! += 1
+        }
+    }
+    let sortedDict = occDict.sorted { $0.value > $1.value }
+    var resultArr = [String]()
+    for (key,val) in sortedDict {
+        var valNum = val
+        while valNum > 0 {
+            resultArr.append(String(key))
+            valNum -= 1
+        }
+        
+    }
+    return resultArr.joined()
+}
+
+frequencySort("tree")
