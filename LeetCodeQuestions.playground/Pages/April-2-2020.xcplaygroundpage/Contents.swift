@@ -126,10 +126,36 @@ func selfDividingNumbers(_ left: Int, _ right: Int) -> [Int] {
 
 selfDividingNumbers(1, 22)
 
-var str = 1230
 
-let arr = Array(String(str))
+/*
+ 1295. Find Numbers with Even Number of Digits
+ Easy
+ 
+ Given an array nums of integers, return how many of them contain an even number of digits.
+  
+ Example 1:
 
-for i in arr {
-    let iNum = Int(String(i))
+ Input: nums = [12,345,2,6,7896]
+ Output: 2
+ Explanation:
+ 12 contains 2 digits (even number of digits).
+ 345 contains 3 digits (odd number of digits).
+ 2 contains 1 digit (odd number of digits).
+ 6 contains 1 digit (odd number of digits).
+ 7896 contains 4 digits (even number of digits).
+ Therefore only 12 and 7896 contain an even number of digits.
+ */
+
+func findNumbers(_ nums: [Int]) -> Int {
+    var count = 0
+    
+    for num in nums {
+        let numArr = Array(String(num))
+        if numArr.count % 2 == 0 {
+            count += 1
+        }
+    }
+    return count
 }
+
+findNumbers([12,345,2,6,7896])
