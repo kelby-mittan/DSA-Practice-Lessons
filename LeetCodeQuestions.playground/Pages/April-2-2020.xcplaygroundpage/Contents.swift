@@ -159,3 +159,78 @@ func findNumbers(_ nums: [Int]) -> Int {
 }
 
 findNumbers([12,345,2,6,7896])
+
+/*
+ 1380. Lucky Numbers in a Matrix
+ Easy
+ Given a m * n matrix of distinct numbers, return all lucky numbers in the matrix in any order.
+
+ A lucky number is an element of the matrix such that it is the minimum element in its row and maximum in its column.
+
+ Example 1:
+
+ Input: matrix = [[3,7,8],[9,11,13],[15,16,17]]
+ Output: [15]
+ Explanation: 15 is the only lucky number since it is the minimum in its row and the maximum in its column
+ Example 2:
+
+ Input: matrix = [[1,10,4,2],[9,3,8,7],[15,16,17,12]]
+ Output: [12]
+ Explanation: 12 is the only lucky number since it is the minimum in its row and the maximum in its column.
+ Example 3:
+
+ Input: matrix = [[7,8],[1,2]]
+ Output: [7]
+ */
+
+let matrix = [[3,7,8],[9,11,13],[15,16,17]]
+/*
+ 3   7   8
+ 9  11  13
+ 15 16  17
+ */
+func luckyNumbers (_ matrix: [[Int]]) -> [Int] {
+//    var resultArr = [Int]()
+//    var rowMin = Int.max
+//    var colMax = Int.min
+//    let rows = matrix[0].count
+//    let collumns = matrix.count
+//    for arr in matrix {
+////        let count = arr.count
+//
+//        for (i, num) in arr.enumerated() {
+//
+//        }
+//    }
+//
+//    return resultArr
+    var minimumValueRowIndices = Array(repeating: 0, count: matrix.count)
+    var maximumValueColumn = Array(repeating: -1, count: matrix[0].count)
+    
+    var luckyNumbers: [Int] = []
+    
+    for row in 0..<matrix.count {
+        for column in 0..<matrix[row].count {
+            // Track the minimum indices per row and add the index only if
+            // the value is less than the value associated with the index in
+            // minimumValueRowIndices for this particlular row
+            if matrix[row][column] < matrix[row][minimumValueRowIndices[row]] {
+                minimumValueRowIndices[row] = column
+            }
+            
+            // Track the maxium
+            if matrix[row][column] > maximumValueColumn[column] {
+                maximumValueColumn[column] = matrix[row][column]
+            }
+        }
+    }
+    for row in 0..<matrix.count {
+        // does the minium value of the row equal the max value at that column?
+        if matrix[row][minimumValueRowIndices[row]] == maximumValueColumn[minimumValueRowIndices[row]] {
+            luckyNumbers.append(maximumValueColumn[minimumValueRowIndices[row]])
+        }
+    }
+    return luckyNumbers
+}
+
+luckyNumbers(matrix)
