@@ -191,3 +191,116 @@ func getDecimalValue(_ head: ListNode?) -> Int {
 }
 
 getDecimalValue(node1)
+
+/*
+ 448. Find All Numbers Disappeared in an Array
+ Easy
+
+ Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+ Find all the elements of [1, n] inclusive that do not appear in this array.
+
+ Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+
+ Example:
+
+ Input:
+ [4,3,2,7,8,2,3,1]
+
+ Output:
+ [5,6]
+ */
+
+func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
+//    var resultArr = [Int]()
+//    for num in 1...nums.count {
+//        if !nums.contains(num) {
+//            resultArr.append(num)
+//        }
+//    }
+//    return resultArr
+    var solution = Array(repeating: 0, count: nums.count)
+    // O(n)
+    for i in 1..<nums.count+1 {
+        solution[i-1] = i
+    }
+    // O(n)
+    for num in nums {
+        solution[num-1] = -1
+    }
+    // O(n) https://developer.apple.com/documentation/swift/array/3017530-removeall
+    solution.removeAll { $0 == -1 }
+    // O(n) + O(n) + O(n) = O(n)
+    return solution
+}
+
+findDisappearedNumbers([4,3,2,7,8,2,3,1])
+
+/*
+ 442. Find All Duplicates in an Array
+ Medium
+
+ Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+ Find all the elements that appear twice in this array.
+
+ Could you do it without extra space and in O(n) runtime?
+
+ Example:
+ Input:
+ [4,3,2,7,8,2,3,1]
+
+ Output:
+ [2,3]
+ */
+
+func findDuplicates(_ nums: [Int]) -> [Int] {
+    
+    var occDict = [Int:Int]()
+    var resultArr = [Int]()
+    for num in nums {
+        if occDict[num] == nil {
+            occDict[num] = 1
+        } else {
+            occDict[num]! += 1
+            resultArr.append(num)
+        }
+    }
+    return resultArr
+}
+
+findDuplicates([4,3,2,7,8,2,3,1])
+
+/*
+ 1374. Generate a String With Characters That Have Odd Counts
+ Easy
+
+ Given an integer n, return a string with n characters such that each character in such string occurs an odd number of times.
+
+ The returned string must contain only lowercase English letters. If there are multiples valid strings, return any of them.
+
+ Example 1:
+
+ Input: n = 4
+ Output: "pppz"
+ Explanation: "pppz" is a valid string since the character 'p' occurs three times and the character 'z' occurs once. Note that there are many other valid strings such as "ohhh" and "love".
+ Example 2:
+
+ Input: n = 2
+ Output: "xy"
+ Explanation: "xy" is a valid string since the characters 'x' and 'y' occur once. Note that there are many other valid strings such as "ag" and "ur".
+ Example 3:
+
+ Input: n = 7
+ Output: "holasss"
+ */
+
+func generateTheString(_ n: Int) -> String {
+    if n % 2 == 0 {
+        return String(Array(repeating: "p", count: n - 1) + "z")
+    } else {
+        return String(Array(repeating: "p", count: n))
+    }
+}
+
+generateTheString(7)
