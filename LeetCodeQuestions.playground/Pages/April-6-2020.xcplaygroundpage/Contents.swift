@@ -37,21 +37,21 @@ import Foundation
 func balancedStringSplit(_ s: String) -> Int {
     
     var balance = 0
-    var count = 0
+    var split = 0
     
-    for i in s {
-        if i == "L" {
+    for char in s {
+        if char == "L" {
             balance += 1
         } else {
             balance -= 1
         }
         
         if balance == 0 {
-            count += 1
+            split += 1
         }
     }
     
-    return count
+    return split
 }
 
 balancedStringSplit("RLRRLLRLRL")
