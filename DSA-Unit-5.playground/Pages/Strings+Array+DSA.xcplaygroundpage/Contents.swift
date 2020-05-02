@@ -5,7 +5,7 @@ import Foundation
 // PALINDROME
 func palindrome(_ str: String) -> Bool {
 
-    var puncless = str
+    var puncless = str.lowercased()
     
     for char in puncless {
         if char.isPunctuation {
@@ -13,17 +13,28 @@ func palindrome(_ str: String) -> Bool {
         }
     }
     puncless = puncless.replacingOccurrences(of: " ", with: "")
-    
-    let charArr = Array(puncless.reversed())
-    let reversed = String(charArr).replacingOccurrences(of: " ", with: "").lowercased()
-    if reversed.lowercased() == puncless.lowercased() {
-        return true
-    } else {
-        print(reversed.lowercased())
-        print(puncless.lowercased())
-        return false
+    var puncArr = [String]()
+    for char in puncless {
+        puncArr.append(String(char))
     }
     
+    var revArr = [String]()
+    while !puncArr.isEmpty {
+        revArr.append(String(puncArr.last ?? ""))
+        puncArr.removeLast()
+    }
+    
+//    let charArr = Array(puncless.reversed())
+//    let reversed = String(charArr).replacingOccurrences(of: " ", with: "").lowercased()
+//    if reversed.lowercased() == puncless.lowercased() {
+//        return true
+//    } else {
+//        print(reversed.lowercased())
+//        print(puncless.lowercased())
+//        return false
+//    }
+    print(revArr.joined())
+    return revArr.joined() == puncless
 }
 
 palindrome("Madam I'm Adam")
@@ -32,21 +43,32 @@ palindrome("Madam I'm Adam")
 
 func isPangram(_ str: String) -> Bool {
     
-    var puncless = str
-    for char in puncless {
-        if char.isPunctuation {
-            puncless.removeAll(where: { $0 == char })
+    let s = str.lowercased()
+    var strSet = Set<Character>()
+    for char in s {
+        if !char.isPunctuation && char != " " {
+//            puncless.removeAll(where: { $0 == char })
+            strSet.insert(char)
+        }
+        if strSet.count == 26 {
+            return true
         }
     }
-    puncless = puncless.replacingOccurrences(of: " ", with: "")
-    let set = Set(puncless.lowercased())
-    if set.count == 26 {
-        return true
-    } else {
-        print(puncless.lowercased())
-        return false
-    }
+    return false
     
+//    if strSet.count == 26 {
+//        return true
+//    } else {
+//        return false
+//    }
+//    puncless = puncless.replacingOccurrences(of: " ", with: "")
+//    let set = Set(puncless.lowercased())
+//    if set.count == 26 {
+//        return true
+//    } else {
+//        print(puncless.lowercased())
+//        return false
+//    }
 }
 
 isPangram("The quick brown fox jumps over the lazy dog")
@@ -250,7 +272,6 @@ func firstRepeatingWord(_ str: String) -> String {
     for word in punclessArr {
         if wordSeen.contains(word) {
             wordSeenTwice.append(word)
-
         }
         wordSeen.append(word)
     }
@@ -268,7 +289,7 @@ func firstRepeatingWord(_ str: String) -> String {
     return doubleWord
 }
 
-firstRepeatingWord("hey!! how? are you you doing how how")
+firstRepeatingWord("hey you how are you you doing how how")
 
 func shiftZeros(_ arr: [Int]) -> ([Int], Int) {
     
