@@ -3,7 +3,9 @@
 import Foundation
 
 /*
+ ======================================
  525. Contiguous Array
+ ======================================
  Medium
  
  Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
@@ -43,7 +45,9 @@ func findMaxLength(_ nums: [Int]) -> Int {
 findMaxLength([0,1,0,1,1,0,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0])
 
 /*
+ ======================================
  20. Valid Parentheses
+ ======================================
  Easy
 
  Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -92,7 +96,9 @@ func isValid(_ s: String) -> Bool {
 }
 
 /*
+ ======================================
  225. Implement Stack using Queues
+ ======================================
  Easy
 
  Implement the following operations of a stack using queues.

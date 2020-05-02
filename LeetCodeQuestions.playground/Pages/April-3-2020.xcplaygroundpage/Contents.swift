@@ -2,11 +2,10 @@
 
 import Foundation
 
-//=======================================================
-//=======================================================
-
 /*
+ ===========================================
  1313. Decompress Run-Length Encoded List
+ ===========================================
  Easy
  
  We are given a list nums of integers representing a list compressed with run-length encoding.
@@ -49,11 +48,10 @@ func decompressRLElist(_ nums: [Int]) -> [Int] {
 
 decompressRLElist([1,2,3,4])
 
-//=======================================================
-//=======================================================
-
 /*
+ ===========================================
  443. String Compression
+ ===========================================
  Easy
  Given an array of characters, compress it in-place.
  
@@ -124,11 +122,11 @@ func compress(_ chars: inout [Character]) -> Int {
 var charsArr: [Character] = ["a","a","a","b","b","a","a"]
 compress(&charsArr)
 
-//=======================================================
-//=======================================================
 
 /*
+ ========================================================
  1290. Convert Binary Number in a Linked List to Integer
+ ========================================================
  Easy
 
  Given head which is a reference node to a singly-linked list. The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
@@ -193,7 +191,9 @@ func getDecimalValue(_ head: ListNode?) -> Int {
 getDecimalValue(node1)
 
 /*
+ ========================================================
  448. Find All Numbers Disappeared in an Array
+ ========================================================
  Easy
 
  Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
@@ -237,7 +237,9 @@ func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
 findDisappearedNumbers([4,3,2,7,8,2,3,1])
 
 /*
+ ========================================================
  442. Find All Duplicates in an Array
+ ========================================================
  Medium
 
  Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
@@ -272,7 +274,9 @@ func findDuplicates(_ nums: [Int]) -> [Int] {
 findDuplicates([4,3,2,7,8,2,3,1])
 
 /*
+ =============================================================
  1374. Generate a String With Characters That Have Odd Counts
+ =============================================================
  Easy
 
  Given an integer n, return a string with n characters such that each character in such string occurs an odd number of times.

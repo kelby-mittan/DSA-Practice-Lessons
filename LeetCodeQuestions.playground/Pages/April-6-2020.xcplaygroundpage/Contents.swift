@@ -3,7 +3,9 @@
 import Foundation
 
 /*
+ ==========================================
  1221. Split a String in Balanced Strings
+ ==========================================
  Easy
 
  Balanced strings are those who have equal quantity of 'L' and 'R' characters.

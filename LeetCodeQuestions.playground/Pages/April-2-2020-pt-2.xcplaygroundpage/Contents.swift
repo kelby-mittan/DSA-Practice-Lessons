@@ -3,7 +3,9 @@
 import Foundation
 
 /*
+ ========================================================
  1389. Create Target Array in the Given Order
+ ========================================================
  Easy
 
  Given two arrays of integers nums and index. Your task is to create target array under the following rules:
@@ -58,7 +60,9 @@ func createTargetArray(_ nums: [Int], _ index: [Int]) -> [Int] {
 createTargetArray([0,1,2,3,4], [0,1,2,2,1])
 
 /*
+ ========================================================
  1342. Number of Steps to Reduce a Number to Zero
+ ========================================================
  Easy
 
  Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
@@ -110,7 +114,9 @@ numberOfSteps(123)
 
 
 /*
+ ========================================================
  771. Jewels and Stones
+ ========================================================
  
  You're given strings J representing the types of stones that are jewels, and S representing the stones you have.  Each character in S is a type of stone you have.  You want to know how many of the stones you have are also jewels.
 
@@ -144,7 +150,9 @@ func numJewelsInStones(_ J: String, _ S: String) -> Int {
 numJewelsInStones("aA", "aAAbbbb")
 
 /*
+ ========================================================
  1207. Unique Number of Occurrences
+ ========================================================
  Easy
 
  Given an array of integers arr, write a function that returns true if and only if the number of occurrences of each value in the array is unique.
@@ -191,7 +199,9 @@ func uniqueOccurrences(_ arr: [Int]) -> Bool {
 uniqueOccurrences([-3,0,1,-3,1,1,1,-3,10,0])
 
 /*
+ ========================================================
  387. First Unique Character in a String
+ ========================================================
  
  Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
 
@@ -226,7 +236,9 @@ func firstUniqChar(_ s: String) -> Int {
 firstUniqChar("loveleetcode")
 
 /*
+ ========================================================
  451. Sort Characters By Frequency
+ ========================================================
  Given a string, sort it in decreasing order based on the frequency of characters.
 
  Example 1:

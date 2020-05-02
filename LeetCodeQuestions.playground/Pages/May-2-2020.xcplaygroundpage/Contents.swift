@@ -3,7 +3,9 @@
 import Foundation
 
 /*
+ ===================================
  206. Reverse Linked List
+ ===================================
  Easy
  
  Reverse a singly linked list.
@@ -27,28 +29,32 @@ public class ListNode {
 }
 
 func reverseList(_ head: ListNode?) -> ListNode? {
-//    if head == nil {
-//        return nil
-//    }
-//    var current = head
-//    var previous: ListNode?
-//    var next: ListNode?
-//
-//    while current != nil {
-//        next = current?.next
-//        current?.next = previous
-//        previous = current
-//        current = next
-//    }
-//    return previous
+    if head == nil {
+        return nil
+    }
+    var current = head
+    var previous: ListNode?
+    var next: ListNode?
+
+    while current != nil {
+        next = current?.next
+        current?.next = previous
+        previous = current
+        current = next
+    }
+    return previous
+}
+
+func reverseListRec(_ head: ListNode?) -> ListNode? {
     guard let list = head else { return nil }
     guard list.next != nil else { return list }
 
-    let rev = reverseList(list.next)
+    let rev = reverseListRec(list.next)
 
     list.next?.next = list
     list.next = nil
     return rev
 }
+
 
 
