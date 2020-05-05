@@ -122,11 +122,11 @@ class MyStack {
 
     /** Initialize your data structure here. */
     init() {
-        
+
     }
-    
+
     var queue = [Int]()
-    
+
     /** Push element x onto stack. */
     func push(_ x: Int) {
         queue.append(x)
@@ -134,21 +134,112 @@ class MyStack {
             queue.append(queue.removeFirst())
         }
     }
-    
+
     /** Removes the element on top of the stack and returns that element. */
     func pop() -> Int {
         return queue.removeFirst()
     }
-    
+
     /** Get the top element. */
     func top() -> Int {
         guard let top = queue.first else { return 0 }
         return top
     }
-    
+
     /** Returns whether the stack is empty. */
     func empty() -> Bool {
         return queue.isEmpty
     }
 }
 
+class MyStackTwo {
+    
+    // implement a stack wiht queus
+    var leftQueue: Queue
+    var rightQueue: Queue
+    
+    var topp = 0
+    /** Initialize your data structure here. */
+    init() {
+        leftQueue = Queue()
+        rightQueue = Queue()
+    }
+    
+    /** Push element x onto stack. */
+    func push(_ x: Int) {
+        // o(1)
+        leftQueue.enqueue(x)
+        topp = x
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    func pop() -> Int {
+        // o(2n)
+        // o(n)
+        // cant really just one queue, thats why we have two.
+        // we're gonna use rightqueue, as a copy of the left, while we try to remove the first elemnt from leftqueue
+        // if we had a stack and pushed 1, 2 ,3
+        // when we dequeue we'll only get 1.  when we actually want 3.
+        // so right queue is a buffer that will take every elemnt from the leftqueue, except the last one.
+        
+        while leftQueue.size > 1 {
+            // adding every elemnt excdept the last one..
+            // a stack of 1, 2, 3
+            // right queue will only have 1 and 2.
+            if let dequeue = leftQueue.dequeue() {
+                // since 3 is no longer the top of the stack, 2 is now the last one.
+                rightQueue.enqueue(dequeue)
+                topp = dequeue
+            }
+        }
+        
+        // left queue is only left with one elemnt, and that's gonna be 3.
+        let x = leftQueue.dequeue() ?? 0
+        // if we leave off with returning here. if they call pop again, nothing will appear the leftqueue.
+        
+        while let dequeue = rightQueue.dequeue() {
+            leftQueue.enqueue(dequeue)
+        }
+        // left queue was empty, now its [1, 2]
+        
+        return x
+    }
+    
+    /** Get the top element. */
+    func top() -> Int {
+        topp
+    }
+    
+    /** Returns whether the stack is empty. */
+    func empty() -> Bool {
+        leftQueue.isEmpty
+    }
+}
+class Queue {
+    private var array: [Int]
+    var size: Int {
+        array.count
+    }
+    
+    var isEmpty: Bool {
+        array.isEmpty
+    }
+    
+    var peek: Int? {
+        array.first
+    }
+    
+    init() {
+        array = []
+    }
+    
+    @discardableResult
+    func enqueue(_ element: Int) -> Bool {
+        array.append(element)
+        return true
+    }
+    
+    func dequeue() -> Int? {
+        return !isEmpty ? array.removeFirst() : nil
+    }
+}

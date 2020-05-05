@@ -57,4 +57,45 @@ func reverseListRec(_ head: ListNode?) -> ListNode? {
 }
 
 
+/*
+ ================================
+ 234. Palindrome Linked List
+ ================================
+ Easy
+
+ Given a singly linked list, determine if it is a palindrome.
+
+ Example 1:
+
+ Input: 1->2
+ Output: false
+ Example 2:
+
+ Input: 1->2->2->1
+ Output: true
+ */
+
+func isPalindrome(_ head: ListNode?) -> Bool {
+    var fast: ListNode? = head
+    var slow: ListNode? = head
+    
+    while fast != nil && fast?.next != nil {
+        fast = fast?.next?.next
+        slow = slow?.next
+    }
+    if fast != nil {
+        slow = slow?.next
+    }
+    slow = reverseList(slow)
+    fast = head
+    while slow != nil {
+        if fast?.val != slow?.val {
+            return false
+        }
+        fast = fast?.next
+        slow = slow?.next
+    }
+    
+    return true
+}
 
