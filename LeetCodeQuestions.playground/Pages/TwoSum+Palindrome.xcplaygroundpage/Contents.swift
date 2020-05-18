@@ -22,17 +22,11 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     var dict = [Int : Int]()
     var res = [Int]()
     
-    
-    // [2,5,3,1]                        [2:0, 5:1 ,
-    //(0,2)
-    // (1,5)
-    // (2,3)
     for (i, n) in nums.enumerated() {
-        if let index = dict[target - n] { // dict[5] = 1
-            res.append(index) // 1
-            res.append(i)  // 2
+        if let index = dict[target - n] {
+            res.append(index)
+            res.append(i)
         }
-        // dict[5] = 1
         dict[n] = i
     }
     return res

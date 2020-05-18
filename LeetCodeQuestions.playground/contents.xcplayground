@@ -11,5 +11,8 @@
         <page name='May-4-2020'/>
         <page name='TwoSum+Palindrome'/>
         <page name='merge'/>
+        <page name='mergeTwoLists'/>
+        <page name='May-11-RansomNote'/>
+        <page name='May-13-FlippingImage'/>
     </pages>
 </playground>

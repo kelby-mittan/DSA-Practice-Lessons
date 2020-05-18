@@ -34,19 +34,31 @@ import Foundation
 
 func smallerNumbersThanCurrent(_ nums: [Int]) -> [Int] {
     
+    let sorted = nums.sorted()
     var resultArr = [Int]()
+    var dict = [Int:Int]()
     
-    for i in nums {
-        var count = 0
-        for j in nums {
-            if j < i {
-                count += 1
-            }
+    for i in 0..<sorted.count {
+        if dict[sorted[i]] == nil {
+            dict[sorted[i]] = i
         }
-        resultArr.append(count)
+    }
+    for i in 0..<nums.count {
+        resultArr.append(dict[nums[i]]!)
     }
     
     return resultArr
+    
+//    for i in nums {
+//        var count = 0
+//        for j in nums {
+//            if j < i {
+//                count += 1
+//            }
+//        }
+//        resultArr.append(count)
+//    }
+    
 }
 
 let nums = [6,5,4,8]
