@@ -4,7 +4,7 @@ import Foundation
 
 // PALINDROME
 func palindrome(_ str: String) -> Bool {
-
+    
     var puncless = str.lowercased()
     
     for char in puncless {
@@ -24,15 +24,15 @@ func palindrome(_ str: String) -> Bool {
         puncArr.removeLast()
     }
     
-//    let charArr = Array(puncless.reversed())
-//    let reversed = String(charArr).replacingOccurrences(of: " ", with: "").lowercased()
-//    if reversed.lowercased() == puncless.lowercased() {
-//        return true
-//    } else {
-//        print(reversed.lowercased())
-//        print(puncless.lowercased())
-//        return false
-//    }
+    //    let charArr = Array(puncless.reversed())
+    //    let reversed = String(charArr).replacingOccurrences(of: " ", with: "").lowercased()
+    //    if reversed.lowercased() == puncless.lowercased() {
+    //        return true
+    //    } else {
+    //        print(reversed.lowercased())
+    //        print(puncless.lowercased())
+    //        return false
+    //    }
     print(revArr.joined())
     return revArr.joined() == puncless
 }
@@ -47,7 +47,7 @@ func isPangram(_ str: String) -> Bool {
     var strSet = Set<Character>()
     for char in s {
         if !char.isPunctuation && char != " " {
-//            puncless.removeAll(where: { $0 == char })
+            //            puncless.removeAll(where: { $0 == char })
             strSet.insert(char)
         }
         if strSet.count == 26 {
@@ -56,19 +56,19 @@ func isPangram(_ str: String) -> Bool {
     }
     return false
     
-//    if strSet.count == 26 {
-//        return true
-//    } else {
-//        return false
-//    }
-//    puncless = puncless.replacingOccurrences(of: " ", with: "")
-//    let set = Set(puncless.lowercased())
-//    if set.count == 26 {
-//        return true
-//    } else {
-//        print(puncless.lowercased())
-//        return false
-//    }
+    //    if strSet.count == 26 {
+    //        return true
+    //    } else {
+    //        return false
+    //    }
+    //    puncless = puncless.replacingOccurrences(of: " ", with: "")
+    //    let set = Set(puncless.lowercased())
+    //    if set.count == 26 {
+    //        return true
+    //    } else {
+    //        print(puncless.lowercased())
+    //        return false
+    //    }
 }
 
 isPangram("The quick brown fox jumps over the lazy dog")
@@ -117,10 +117,8 @@ func getFirstFiveEvenSum(_ arr: [Int]) -> Int {
         }
     }
     var sum = 0
-    if evenArr.count == 5 {
-        for num in evenArr {
-            sum += num
-        }
+    for num in evenArr where evenArr.count == 5 {
+        sum += num
     }
     return sum
 }
@@ -241,7 +239,7 @@ func removeVowels(_ str: String) -> String {
     
     var vowelLessArr = [Character]()
     let vowels: [Character] = ["a","e","i","o","u","y"]
-//    var strArr = Array(str)
+    //    var strArr = Array(str)
     for char in str {
         if !vowels.contains(char) {
             vowelLessArr.append(char)
@@ -268,7 +266,7 @@ func firstRepeatingWord(_ str: String) -> String {
     
     var wordSeen = [String]()
     var wordSeenTwice = [String]()
-
+    
     for word in punclessArr {
         if wordSeen.contains(word) {
             wordSeenTwice.append(word)
@@ -303,8 +301,8 @@ func shiftZeros(_ arr: [Int]) -> ([Int], Int) {
             count += 1
             shiftZeroArr.insert(num, at: 0)
         } else {
-                shiftZeroArr.insert(num, at: shiftZeroArr.count)
-
+            shiftZeroArr.insert(num, at: shiftZeroArr.count)
+            
         }
     }
     
@@ -314,3 +312,19 @@ func shiftZeros(_ arr: [Int]) -> ([Int], Int) {
 shiftZeros([3,0,2,0,0,1,0,4])
 
 print(shiftZeros([3,0,2,0,0,1,0,4]))
+
+func defangIPaddr(_ address: String) -> String {
+    var a = Array(address)
+    // return a.replacingOccurrences(of: ".", with: "[.]")
+    var index = a.count - 1
+    while index > 0 {
+        if a[index] == "." {
+            a.insert("]", at: index+1)
+            a.insert("[", at: index)
+        }
+        index -= 1
+    }
+    return String(a)
+}
+
+defangIPaddr("250.222.333")
