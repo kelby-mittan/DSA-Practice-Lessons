@@ -49,3 +49,94 @@ func maximum69Number (_ num: Int) -> Int {
 }
 
 maximum69Number(9669)
+
+/*
+ 804. Unique Morse Code Words
+ Easy
+
+ International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows: "a" maps to ".-", "b" maps to "-...", "c" maps to "-.-.", and so on.
+
+ For convenience, the full table for the 26 letters of the English alphabet is given below:
+
+ [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+ Now, given a list of words, each word can be written as a concatenation of the Morse code of each letter. For example, "cba" can be written as "-.-..--...", (which is the concatenation "-.-." + "-..." + ".-"). We'll call such a concatenation, the transformation of a word.
+
+ Return the number of different transformations among all words we have.
+
+ Example:
+ Input: words = ["gin", "zen", "gig", "msg"]
+ Output: 2
+ Explanation:
+ The transformation of each word is:
+ "gin" -> "--...-."
+ "zen" -> "--...-."
+ "gig" -> "--...--."
+ "msg" -> "--...--."
+
+ There are 2 different transformations, "--...-." and "--...--.".
+ */
+
+func uniqueMorseRepresentations(_ words: [String]) -> Int {
+
+    let morseArr = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+    let alph = Array("abcdefghijklmnopqrstuvwxyz")
+
+    var dict = [Character:String]()
+
+    for i in 0..<alph.count {
+        dict[alph[i]] = morseArr[i]
+    }
+    
+    var morseResult = [String]()
+    
+    for word in words {
+        var str = String()
+        for char in word {
+            str += dict[char]!
+        }
+        morseResult.append(str)
+    }
+
+    return Set(morseResult).count
+}
+
+uniqueMorseRepresentations(["gin", "zen", "gig", "msg"])
+
+/*
+ 961. N-Repeated Element in Size 2N Array
+ Easy
+
+ In a array A of size 2N, there are N+1 unique elements, and exactly one of these elements is repeated N times.
+
+ Return the element repeated N times.
+
+  
+
+ Example 1:
+
+ Input: [1,2,3,3]
+ Output: 3
+ Example 2:
+
+ Input: [2,1,2,5,3,2]
+ Output: 2
+ Example 3:
+
+ Input: [5,1,5,2,5,3,5,4]
+ Output: 5
+ */
+
+func repeatedNTimes(_ A: [Int]) -> Int {
+    
+    var dict = [Int:Int]()
+    
+    for n in A {
+        dict[n,default: 0] += 1
+    }
+    for (key,val) in dict where val == A.count/2 {
+            return key
+    }
+    return 0
+}
+
+repeatedNTimes([2,1,2,5,3,2])
