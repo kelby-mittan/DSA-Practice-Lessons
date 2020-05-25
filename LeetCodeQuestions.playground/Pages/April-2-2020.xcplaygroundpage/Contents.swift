@@ -304,20 +304,7 @@ let matrix = [[3,7,8],[9,11,13],[15,16,17]]
  15 16  17
  */
 func luckyNumbers (_ matrix: [[Int]]) -> [Int] {
-//    var resultArr = [Int]()
-//    var rowMin = Int.max
-//    var colMax = Int.min
-//    let rows = matrix[0].count
-//    let collumns = matrix.count
-//    for arr in matrix {
-////        let count = arr.count
-//
-//        for (i, num) in arr.enumerated() {
-//
-//        }
-//    }
-//
-//    return resultArr
+    
     var minimumValueRowIndices = Array(repeating: 0, count: matrix.count)
     var maximumValueColumn = Array(repeating: -1, count: matrix[0].count)
     
