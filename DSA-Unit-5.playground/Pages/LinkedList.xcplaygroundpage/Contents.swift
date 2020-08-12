@@ -145,29 +145,29 @@ print(fellows)
 
 extension Node {
     public func reverse(list: Node?) -> Node? {
-            
-            if list == nil {
-                return nil
-            }
-            var current = list
-            var previous: Node?
-            var next: Node?
         
-            while current != nil {
-                next = current?.next
-                current?.next = previous
-                previous = current
-                current = next
-            }
-            return previous
+        if list == nil {
+            return nil
         }
+        var current = list
+        var previous: Node?
+        var next: Node?
+        
+        while current != nil {
+            next = current?.next
+            current?.next = previous
+            previous = current
+            current = next
+        }
+        return previous
+    }
     
     public func recReverse(list: Node?) -> Node? {
         guard let list = list else { return nil }
         guard list.next != nil else { return list }
-
+        
         let rev = recReverse(list: list.next)
-
+        
         list.next?.next = list
         list.next = nil
         return rev
