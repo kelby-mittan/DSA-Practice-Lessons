@@ -16,5 +16,6 @@
         <page name='Stacks'/>
         <page name='BinarySearch'/>
         <page name='DataStructures'/>
+        <page name='CAMTrees'/>
     </pages>
 </playground>

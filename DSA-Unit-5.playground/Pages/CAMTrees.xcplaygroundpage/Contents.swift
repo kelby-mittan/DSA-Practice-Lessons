@@ -56,24 +56,24 @@ import Foundation
  */
 class Queue<T> {
     
-    private var queueueueueueueue: [T] = []
+    private var queue: [T] = []
     
     public var isEmpty: Bool {
-        return queueueueueueueue.isEmpty
+        return queue.isEmpty
     }
     
     public var peek: T? {
-        return queueueueueueueue.first
+        return queue.first
     }
     
     public func enqueue(_ element: T) {
-        queueueueueueueue.append(element)
+        queue.append(element)
     }
     
     @discardableResult
     public func dequeue() -> T? {
         guard !isEmpty else { return nil }
-        return queueueueueueueue.removeFirst()
+        return queue.removeFirst()
     }
 }
 class TreeNode<T> {
