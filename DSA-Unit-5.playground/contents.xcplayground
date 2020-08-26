@@ -17,5 +17,6 @@
         <page name='BinarySearch'/>
         <page name='DataStructures'/>
         <page name='CAMTrees'/>
+        <page name='BST-Medium-Article'/>
     </pages>
 </playground>
