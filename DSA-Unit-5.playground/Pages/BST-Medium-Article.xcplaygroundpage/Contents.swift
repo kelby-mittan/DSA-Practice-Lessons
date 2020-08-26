@@ -50,7 +50,7 @@ class BinaryTree<T: Comparable & CustomStringConvertible> {
 }
 
 extension BinaryTree {
- 
+    
     func traverse() {
         print("\nPRE-ORDER TRAVERSE")
         self.preorder(self.rootNode)
@@ -67,48 +67,76 @@ extension BinaryTree {
     // LNR : LEFT NODE RIGHT
     private func inorder(_ node: TreeNode<T>?) {
         guard let _ = node else { return }
-        self.inorder(node?.leftNode)
+        inorder(node?.leftNode)
         print("\(node!.data)", terminator: " ")
-        self.inorder(node?.rightNode)
+        inorder(node?.rightNode)
     }
     
     // NLR : NODE LEFT RIGHT
     private func preorder(_ node: TreeNode<T>?) {
         guard let _ = node else { return }
         print("\(node!.data)", terminator: " ")
-        self.preorder(node?.leftNode)
-        self.preorder(node?.rightNode)
+        preorder(node?.leftNode)
+        preorder(node?.rightNode)
     }
     
     // LRN :  LEFT RIGHT NODE
     private func postorder(_ node: TreeNode<T>?) {
         guard let _ = node else { return }
-        self.postorder(node?.leftNode)
-        self.postorder(node?.rightNode)
+        postorder(node?.leftNode)
+        postorder(node?.rightNode)
         print("\(node!.data)", terminator: " ")
     }
 }
 
 extension BinaryTree {
     
-    func search(element: T) {
-        self.searchHelper(self.rootNode, element)
+    func search(element: T) -> Bool {
+        return searchHelper(self.rootNode, element)
     }
     
-    private func searchHelper(_ rootNode: TreeNode<T>?, _ element: T) {
+     func searchHelper(_ rootNode: TreeNode<T>?, _ element: T) -> Bool {
+                
+//        guard let rootNode = rootNode else {
+//            print("Not in tree: \(element)")
+//            return false
+//        }
+//
+//        print("ROOT NODE \(rootNode.data)")
+//
+//        if element > rootNode.data {
+//            searchHelper(rootNode.rightNode, element)
+//        } else if element < rootNode.data {
+//            searchHelper(rootNode.leftNode, element)
+//        } else {
+//            print("In tree: \(rootNode.data)")
+//        }
         
-        guard let rootNode = rootNode else {
-            print("INVALID NODE : \(element)")
-            return
-        }
-        
-        print("ROOT NODE \(rootNode.data)")
-        if element > rootNode.data {
-            self.searchHelper(rootNode.rightNode, element)
-        } else if element < rootNode.data {
-            self.searchHelper(rootNode.leftNode, element)
+        guard let node = rootNode else { return false }
+        if element == node.data { return true }
+        if element < node.data {
+            return searchHelper(node.leftNode, element)
         } else {
-           print("NODE FOUND : \(rootNode.data)")
+            return searchHelper(node.rightNode, element)
         }
+        
+//        return rootNode.data == element
     }
 }
+
+let tree = BinaryTree<String>()
+
+tree.insert(element: "F")
+tree.insert(element: "G")
+tree.insert(element: "H")
+tree.insert(element: "D")
+tree.insert(element: "E")
+tree.insert(element: "I")
+tree.insert(element: "J")
+tree.insert(element: "A")
+tree.insert(element: "B")
+tree.insert(element: "C")
+
+tree.traverse()
+
+tree.search(element: "Z")
