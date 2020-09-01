@@ -290,6 +290,18 @@ class BinarySearchTree<T: Comparable> {
 
     // depth_first_traverse (in order traversal)
     // bread_first_traverse
+    
+    
+    public func invertTree(_ root: Node<T>?) -> Node<T>? {
+        guard let root = root else { return nil }
+        
+        let left = invertTree(root.left)
+        let right = invertTree(root.right)
+        
+        root.left = right
+        root.right = left
+        return root
+    }
 }
 
 let tree1 = BinarySearchTree<Int>()
