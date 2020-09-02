@@ -3,7 +3,7 @@ import Foundation
 
 // Medium - https://medium.com/nickelfox/binary-search-tree-in-swift-9158aadbe6a3
 
-class TreeNode<T> {
+class TreeNode<T: CustomStringConvertible> {
     
     var data: T
     var leftNode: TreeNode?
@@ -122,6 +122,24 @@ extension BinaryTree {
         
 //        return rootNode.data == element
     }
+    
+    func printTheTree() -> String {
+        return rootNode?.description ?? ""
+    }
+}
+
+extension TreeNode: CustomStringConvertible {
+  public var description: String {
+    var str = ""
+    if let left = leftNode {
+        str += "(\(left.description) <- "
+    }
+    str += "\(data)"
+    if let right = rightNode {
+      str += " -> (\(right.description))"
+    }
+    return str
+  }
 }
 
 let tree = BinaryTree<String>()
@@ -141,7 +159,19 @@ tree.traverse()
 
 tree.search(element: "Z")
 
+let intTree = BinaryTree<Int>()
 
+intTree.insert(element: 3)
+intTree.insert(element: 2)
+intTree.insert(element: 4)
+intTree.insert(element: 5)
+intTree.insert(element: 1)
+intTree.insert(element: 100)
+intTree.insert(element: 90)
+
+print(intTree)
+
+print(intTree.printTheTree())
 /**
   * Balanced Binary Search Tree
   */
@@ -291,6 +321,18 @@ class BinarySearchTree<T: Comparable> {
     // depth_first_traverse (in order traversal)
     // bread_first_traverse
     
+    public func printTree() -> String {
+      var str = ""
+      if let leftChild = root?.left?.val {
+        str += "(\(leftChild)) <- "
+      }
+        str += "\(root?.val)"
+      if let rightChild = root?.right?.val {
+        str += " -> (\(rightChild))"
+      }
+      return str
+    }
+    
     
     public func invertTree(_ root: Node<T>?) -> Node<T>? {
         guard let root = root else { return nil }
@@ -304,6 +346,20 @@ class BinarySearchTree<T: Comparable> {
     }
 }
 
+extension BinarySearchTree: CustomStringConvertible {
+  public var description: String {
+    var str = ""
+    if let left = root?.left {
+      str += "(\(left.val)) <- "
+    }
+    str += "\(String(describing: root?.val))"
+    if let right = root?.right {
+      str += " -> (\(right.val))"
+    }
+    return str
+  }
+}
+
 let tree1 = BinarySearchTree<Int>()
 tree1.getHeight() // 0
 tree1.insert(1)
@@ -315,6 +371,8 @@ tree1.insert(3)
 print(tree1.root!.val) // 2
 print(tree1.root!.left!.val) // 1
 print(tree1.root!.right!.val) // 3
+
+print(tree1.description)
 // let expectation = """
 //   2
 //  / \
