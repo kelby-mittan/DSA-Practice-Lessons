@@ -5,14 +5,14 @@ import Foundation
 
 class TreeNode<T: CustomStringConvertible> {
     
-    var data: T
+    var value: T
     var leftNode: TreeNode?
     var rightNode: TreeNode?
     
-    init(data: T,
+    init(value: T,
          leftNode: TreeNode? = nil,
          rightNode: TreeNode? = nil) {
-        self.data = data
+        self.value = value
         self.leftNode = leftNode
         self.rightNode = rightNode
     }
@@ -20,10 +20,10 @@ class TreeNode<T: CustomStringConvertible> {
 
 class BinaryTree<T: Comparable & CustomStringConvertible> {
     
-    private var rootNode: TreeNode<T>?
+    var rootNode: TreeNode<T>?
     
     func insert(element: T) {
-        let node = TreeNode(data: element)
+        let node = TreeNode(value: element)
         if let rootNode = self.rootNode {
             self.insertHelper(rootNode, node)
         } else {
@@ -33,7 +33,7 @@ class BinaryTree<T: Comparable & CustomStringConvertible> {
     
     // RECURSIVE FUNCTION
     private func insertHelper(_ rootNode: TreeNode<T>, _ node: TreeNode<T>) {
-        if rootNode.data > node.data {
+        if rootNode.value > node.value {
             if let leftNode = rootNode.leftNode {
                 self.insertHelper(leftNode, node)
             } else {
@@ -68,14 +68,14 @@ extension BinaryTree {
     private func inorder(_ node: TreeNode<T>?) {
         guard let _ = node else { return }
         inorder(node?.leftNode)
-        print("\(node!.data)", terminator: " ")
+        print("\(node!.value)", terminator: " ")
         inorder(node?.rightNode)
     }
     
     // NLR : NODE LEFT RIGHT
     private func preorder(_ node: TreeNode<T>?) {
         guard let _ = node else { return }
-        print("\(node!.data)", terminator: " ")
+        print("\(node!.value)", terminator: " ")
         preorder(node?.leftNode)
         preorder(node?.rightNode)
     }
@@ -85,7 +85,7 @@ extension BinaryTree {
         guard let _ = node else { return }
         postorder(node?.leftNode)
         postorder(node?.rightNode)
-        print("\(node!.data)", terminator: " ")
+        print("\(node!.value)", terminator: " ")
     }
 }
 
@@ -113,8 +113,8 @@ extension BinaryTree {
 //        }
         
         guard let node = rootNode else { return false }
-        if element == node.data { return true }
-        if element < node.data {
+        if element == node.value { return true }
+        if element < node.value {
             return searchHelper(node.leftNode, element)
         } else {
             return searchHelper(node.rightNode, element)
@@ -134,7 +134,7 @@ extension TreeNode: CustomStringConvertible {
     if let left = leftNode {
         str += "(\(left.description) <- "
     }
-    str += "\(data)"
+    str += "\(value)"
     if let right = rightNode {
       str += " -> (\(right.description))"
     }
@@ -158,7 +158,7 @@ tree.insert(element: "C")
 tree.traverse()
 
 tree.search(element: "Z")
-
+print(tree.rootNode!.description)
 let intTree = BinaryTree<Int>()
 
 intTree.insert(element: 3)
@@ -171,10 +171,17 @@ intTree.insert(element: 90)
 
 print(intTree)
 
-print(intTree.printTheTree())
+print(tree.printTheTree())
 /**
   * Balanced Binary Search Tree
   */
+
+
+//=================================================================================
+//=================================================================================
+//=================================================================================
+//=================================================================================
+
 class BinarySearchTree<T: Comparable> {
     public class Node<T: Comparable> {
       var val: T
@@ -206,6 +213,25 @@ class BinarySearchTree<T: Comparable> {
         return
       }
       rebalance(validRoot)
+    }
+    
+    private func insertHelper(_ parent: Node<T>, _ node: Node<T>) {
+        // look at the parent...
+        if parent.val > node.val {
+          if let newLeft = parent.left {
+              insertHelper(newLeft, node)
+          } else {
+              parent.left = node
+          }
+        } else if parent.val < node.val {
+            if let newRight = parent.right {
+                insertHelper(newRight, node)
+            } else {
+                parent.right = node
+            }
+        }
+        // if it's equal value, do nothing as the tree does not have duplicates
+        
     }
 
     private func rotateLeft(_ node: Node<T>) -> Node<T>? {
@@ -260,25 +286,13 @@ class BinarySearchTree<T: Comparable> {
           // then rotate left around the left child
         // rotate right around the left child
     }
-
-    private func insertHelper(_ parent: Node<T>, _ node: Node<T>) {
-        // look at the parent...
-        if parent.val > node.val {
-          if let newLeft = parent.left {
-              insertHelper(newLeft, node)
-          } else {
-              parent.left = node
-          }
-        } else if parent.val < node.val {
-            if let newRight = parent.right {
-                insertHelper(newRight, node)
-            } else {
-                parent.right = node
-            }
-        }
-        // if it's equal value, do nothing as the tree does not have duplicates
-        
+    
+    func getNodeCount<T>(_ tree: BinarySearchTree<T>) -> Int {
+      return 0
     }
+
+
+    
     // public func getHeight() -> Int {
     //   return getHeightHelper(root, 0)
     // }
@@ -358,6 +372,17 @@ extension BinarySearchTree: CustomStringConvertible {
     }
     return str
   }
+    
+//    var str = ""
+//      if let left = leftNode {
+//          str += "(\(left.description) <- "
+//      }
+//      str += "\(data)"
+//      if let right = rightNode {
+//        str += " -> (\(right.description))"
+//      }
+//      return str
+//    }
 }
 
 let tree1 = BinarySearchTree<Int>()
@@ -368,7 +393,7 @@ tree1.insert(2)
 tree1.getHeight() // 2
 tree1.insert(3)
 
-print(tree1.root!.val) // 2
+print(tree1.description) // 2
 print(tree1.root!.left!.val) // 1
 print(tree1.root!.right!.val) // 3
 

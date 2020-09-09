@@ -118,7 +118,7 @@ func getHeight<T>(_ node: Node<T>?) -> Int {  // function overloading
 }
 
 func getNodeCount<T>(_ tree: Tree<T>) -> Int {
-  return 0
+    return getNodeCount(tree.root?.leftChild) + getNodeCount(tree.root?.rightChild) + 1
 }
 
 func getNodeCount<T>(_ node: Node<T>?) -> Int {
@@ -146,9 +146,24 @@ func depthFirstPostOrderTraversal<T>(_ tree: Tree<T>, _ visit: ((T) -> Void)) {
 }
 
 func prettyTreeString<T>(_ tree: Tree<T>) -> String {
-  return ""
+    return tree.root?.description ?? "Tree is nil"
 }
 
 @discardableResult func balanceBinarySearchTree<T>(_ tree: Tree<T>) -> Tree<T> {
   return tree
+}
+
+
+extension Node: CustomStringConvertible {
+  public var description: String {
+    var str = ""
+    if let left = leftChild {
+        str += "(\(left.description) <- "
+    }
+    str += "\(value)"
+    if let right = rightChild {
+      str += " -> (\(right.description))"
+    }
+    return str
+  }
 }
