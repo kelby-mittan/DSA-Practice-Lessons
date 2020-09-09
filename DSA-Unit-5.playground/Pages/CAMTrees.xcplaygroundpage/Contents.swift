@@ -267,7 +267,7 @@ class BinaryNode<T> {
     
 }
 
-extension BinaryNode {
+extension BinaryNode: CustomStringConvertible {
     
     public func inOrderTraversal(_ visit: (BinaryNode) -> ()) {
         leftChild?.inOrderTraversal(visit)
@@ -277,6 +277,18 @@ extension BinaryNode {
     
     public var minimum: T {
         return leftChild?.minimum ?? self.value
+    }
+    
+    public var description: String {
+      var str = ""
+      if let left = leftChild {
+          str += "(\(left.description) <- "
+      }
+      str += "\(value)"
+      if let right = rightChild {
+        str += " -> (\(right.description))"
+      }
+      return str
     }
     
 }
@@ -310,21 +322,21 @@ struct BinarySearchTree<T: Comparable> {
         
         return node
     }
-    
-    // Runtime is O(n)
-    public func contains(_ value: T) -> Bool {
-        
-        var exists = false // By default the value does not exist.
-        
-        // Visits all nodes in the tree to see if the value exists.
-        root?.inOrderTraversal({ (node) in
-            if node.value == value {
-                exists = true // Found the value.
-            }
-        })
-        
-        return exists
-    }
+//    
+//    // Runtime is O(n)
+//    public func contains(_ value: T) -> Bool {
+//        
+//        var exists = false // By default the value does not exist.
+//        
+//        // Visits all nodes in the tree to see if the value exists.
+//        root?.inOrderTraversal({ (node) in
+//            if node.value == value {
+//                exists = true // Found the value.
+//            }
+//        })
+//        
+//        return exists
+//    }
     
     // Runtime is O(log n)
     public func betterContains(_ value: T) -> Bool {
@@ -384,6 +396,9 @@ struct BinarySearchTree<T: Comparable> {
         return node
     }
     
+    public func printTree() -> String {
+        return root?.description ?? "Tree is Nil"
+    }
 }
 
 /*
@@ -415,7 +430,7 @@ struct BinarySearchTree<T: Comparable> {
                          /  \
                             493
                             /  \
-                           64
+                           64  503
  */
 
 var tree = BinarySearchTree<Int>()
@@ -430,4 +445,9 @@ tree.insert(503)
 tree.root?.inOrderTraversal({ (node) in
     print(node.value, terminator: " ")
 })
+print("")
+print(tree.printTree())
 
+//tree.removeNode(64)
+//tree.removeNode(12)
+print(tree.printTree())
