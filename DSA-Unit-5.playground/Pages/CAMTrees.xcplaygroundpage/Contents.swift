@@ -322,19 +322,19 @@ struct BinarySearchTree<T: Comparable> {
         
         return node
     }
-//    
+//
 //    // Runtime is O(n)
 //    public func contains(_ value: T) -> Bool {
-//        
+//
 //        var exists = false // By default the value does not exist.
-//        
+//
 //        // Visits all nodes in the tree to see if the value exists.
 //        root?.inOrderTraversal({ (node) in
 //            if node.value == value {
 //                exists = true // Found the value.
 //            }
 //        })
-//        
+//
 //        return exists
 //    }
     
@@ -441,6 +441,9 @@ tree.insert(23)
 tree.insert(493)
 tree.insert(64)
 tree.insert(503)
+tree.insert(11)
+tree.insert(10)
+tree.insert(4)
 
 tree.root?.inOrderTraversal({ (node) in
     print(node.value, terminator: " ")
