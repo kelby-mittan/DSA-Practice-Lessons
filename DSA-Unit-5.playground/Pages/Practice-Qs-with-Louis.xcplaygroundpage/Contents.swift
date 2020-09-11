@@ -16,7 +16,7 @@ import Foundation
  - den -> cent is not valid (differs by 1’st char [‘d’ != ‘c’])
  
  I/O Example:
- - Input: {den, bent, dew, dents, dent, bet} { ben, bent, bents, bentss}
+ - Input: {den, bent, dew, dents, dent, bet}
  - Result: 3 ({den, dent, dents})
  
  */
@@ -43,11 +43,7 @@ func getChain(_ arr: [String]) -> Int {
     
     let sortedArr = arr.sorted { $0.count < $1.count }
         
-    for i in 0 ..< sortedArr.count {
-        
-        if i == sortedArr.count {
-            break
-        }
+    for i in 0 ..< sortedArr.count - 1 {
         
         let word = sortedArr[i]
 
@@ -66,5 +62,5 @@ func getChain(_ arr: [String]) -> Int {
     return count
 }
 
-getChain(["bev","den","add", "bent", "dew", "dents", "dent", "bet","denzas"])
+getChain(["den","add", "bent", "dew", "dents", "dent", "bet","denzas"])
 

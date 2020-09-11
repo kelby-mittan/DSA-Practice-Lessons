@@ -340,7 +340,7 @@ class BinarySearchTree<T: Comparable> {
       if let leftChild = root?.left?.val {
         str += "(\(leftChild)) <- "
       }
-        str += "\(root?.val)"
+        str += "\(String(describing: root?.val))"
       if let rightChild = root?.right?.val {
         str += " -> (\(rightChild))"
       }
