@@ -38,29 +38,136 @@ import Foundation
 
 // fdt abcg fdtz abcgx -> abcg abcgx fdt fdtz
 
+
+class Node<T: Equatable> {
+    let value: T
+    var children: [Node<T>] = []
+    
+    init(value: T) {
+        self.value = value
+    }
+    
+    func addChildren(value: T) -> Node<T> {
+        
+        if let index = children.firstIndex(where: { (node) -> Bool in
+            node.value == value
+        }) {
+            return children[index]
+        } else {
+            let newNode = Node(value: value)
+            children.append(newNode)
+            return newNode
+        }
+    }
+}
+
+
+
+struct Tree<T:Equatable>{
+    var root: Node<T>?
+    
+    init() {}
+    
+    
+}
+
+
+// 1: iterating through each word in the input and adding the nodes
+// 2: Traverse the tree while counting the number of times running into an end node.
+
+
+
+func getChainWithTree(_ arr: [String]) -> Int {
+    
+    guard !arr.isEmpty else { return 0 }
+    guard arr.count != 1 else { return 1 }
+    
+    var tree = Tree<String>()
+    tree.root = Node(value: "")
+    
+    for word in arr {
+        
+        var currentNode = tree.root!
+        
+        for char in word {
+            
+            currentNode = currentNode.addChildren(value: String(char))
+            
+            print(String(char))
+            //            print(currentNode.children)
+        }
+        
+        currentNode.addChildren(value: "end")
+    }
+    
+    return chainCounter(tree.root!, count: 0)
+}
+
+
+func chainCounter(_ node: Node<String>, count: Int) -> Int {
+    //    var newNode = node
+    var chainCount = count
+    
+    print("val: \(node.value)")
+    if node.children.contains(where: { (node) -> Bool in
+        node.value == "end"
+    }) {
+        chainCount += 1
+        print(node.value)
+        print(chainCount)
+    }
+    
+    var childChainCounts = [Int]()
+    
+    for child in node.children {
+        childChainCounts.append(chainCounter(child, count: chainCount))
+        
+    }
+    print(childChainCounts.count)
+    return childChainCounts.max() ?? chainCount
+}
+
+
+getChainWithTree(["den", "dent", "dents", "abc", "abcd", "abcde", "dentsy", "dentsyop"])
+
+
 func getChain(_ arr: [String]) -> Int {
-    var count = 0
+    
+    guard !arr.isEmpty else { return 0 }
+    
+    
+    var maxChainCount = 1
     
     let sortedArr = arr.sorted { $0.count < $1.count }
-        
+    
     for i in 0 ..< sortedArr.count - 1 {
         
+        var count = 1
+        
         let word = sortedArr[i]
-
+        
         let oneCountUpArr = sortedArr.filter { $0.count == word.count + 1 }
-    
+        
         for str in oneCountUpArr {
             let withoutLastChar = String(str[str.startIndex..<word.endIndex])
             if withoutLastChar == word {
                 count += 1
+                
+                if count >= maxChainCount {
+                    maxChainCount = count
+                }
                 break
             }
+            
         }
         
     }
     
-    return count
+    return maxChainCount
 }
 
 getChain(["den","add", "bent", "dew", "dents", "dent", "bet","denzas"])
 
+getChain(["den", "dent", "dents", "abc", "abcd", "abcde", "dentsy"])
+
+// den abc dent abcd
