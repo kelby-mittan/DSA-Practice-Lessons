@@ -91,8 +91,9 @@ func getChainWithTree(_ arr: [String]) -> Int {
         
         for char in word {
             
-            currentNode = currentNode.addChildren(value: String(char))
-            
+//            if getHeight(currentNode) == word.count {
+                currentNode = currentNode.addChildren(value: String(char))
+//            }
             print(String(char))
             //            print(currentNode.children)
         }
@@ -103,6 +104,17 @@ func getChainWithTree(_ arr: [String]) -> Int {
     return chainCounter(tree.root!, count: 0)
 }
 
+func getHeight<T>(_ node: Node<T>?) -> Int {
+  guard let node = node else {
+    return 0
+  }
+
+  var heights: [Int] = []
+  for child in node.children {
+    heights.append(getHeight(child))
+  }
+  return 1 + (heights.max() ?? 0)
+}
 
 func chainCounter(_ node: Node<String>, count: Int) -> Int {
     //    var newNode = node
