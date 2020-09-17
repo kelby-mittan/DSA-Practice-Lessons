@@ -21,5 +21,7 @@
         <page name='BST-with-Louis'/>
         <page name='Practice-Qs-with-Louis'/>
         <page name='Practice-Louis-Permutations-etc'/>
+        <page name='O(n^2)-sorting-w-Cam'/>
+        <page name='Recursion-w-Cam'/>
     </pages>
 </playground>
