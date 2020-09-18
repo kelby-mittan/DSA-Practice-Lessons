@@ -138,7 +138,7 @@ getFactorialRecursively(4)
 // Second Largest
 
 func secondLargest(_ arr: [Int]) -> Int {
-    
+        
     var largeNum = Int.min
     var secondLargest = Int.min
     

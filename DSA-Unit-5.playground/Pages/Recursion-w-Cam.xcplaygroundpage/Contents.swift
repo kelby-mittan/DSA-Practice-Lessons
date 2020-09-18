@@ -196,8 +196,18 @@ print(reverseList(rootNode)!)
  */
 
 
-func findA(_ str: String) -> Bool {
+func findARecursive(_ str: String, _ index: Int = 0) -> Bool {
     
-    
-    return false
+    let s = str.lowercased()
+    if index == s.count{
+        return false
+    }
+    if s[s.index(s.startIndex, offsetBy: index)] == "a"  {
+        return true
+    }
+    return findARecursive(s, index + 1)
 }
+
+print(findARecursive("hellotherea"))
+
+
