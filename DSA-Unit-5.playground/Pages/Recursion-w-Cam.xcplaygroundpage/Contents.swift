@@ -86,7 +86,7 @@ func factorial(_ num: Int) -> Int {
     return num * factorial(num - 1) // Progressing toward a base case
 }
 
-// print(factorial(5))
+ print(factorial(5))
 // factorial(5) = 5 * factorial(4) -> Pause
 // factorial(4) = 5 * 4 * factorial(3) -> Pause
 // factorial(3) = 5 * 4 * 3 * factorial(2) -> Pause
