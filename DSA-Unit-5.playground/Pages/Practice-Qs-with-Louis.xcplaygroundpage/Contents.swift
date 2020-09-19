@@ -95,9 +95,9 @@ func getChainWithTree(_ arr: [String]) -> Int {
     var tree = Tree<String>()
     tree.root = Node(value: "")
     
-    let sortedArr = arr.sorted { $0.count < $1.count }
+//    let sortedArr = arr.sorted { $0.count < $1.count }
     
-    for (i,word) in sortedArr.enumerated() {
+    for word in arr {
         
         var currentNode = tree.root!
         
@@ -105,13 +105,15 @@ func getChainWithTree(_ arr: [String]) -> Int {
             
             print("Height: \(getHeight(currentNode))")
             
-            if i > 0 {
-                if word.count == sortedArr[i-1].count + 1 {
-                    currentNode = currentNode.addChildren(value: String(char))
-                }
-            }
+            currentNode = currentNode.addChildren(value: String(char))
             
-            print("this nodes children: \(currentNode.children.count )")
+//            if i > 0 {
+//                if word.count == sortedArr[i-1].count + 1 {
+//                    currentNode = currentNode.addChildren(value: String(char))
+//                }
+//            }
+            
+            
             
             print(String(char))
             
@@ -138,6 +140,10 @@ func chainCounter(_ node: Node<String>, count: Int) -> Int {
         chainCount += 1
         print(node.value)
         print(chainCount)
+    } else {
+        if chainCount != 0 {
+            return chainCount
+        }
     }
     
     var childChainCounts = [Int]()
@@ -164,7 +170,7 @@ func chainCounter(_ node: Node<String>, count: Int) -> Int {
 }
 
 
-getChainWithTree(["den", "dent", "dents", "abc", "abcd", "abcde", "dentsy", "dentsyopp"])
+getChainWithTree(["den", "dent", "dents", "abc", "abcd", "abcde", "dentsy", "dentsyoppp"])
 
 
 func getChain(_ arr: [String]) -> Int {
