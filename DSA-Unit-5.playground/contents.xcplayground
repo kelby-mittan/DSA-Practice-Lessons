@@ -23,5 +23,6 @@
         <page name='Practice-Louis-Permutations-etc'/>
         <page name='O(n^2)-sorting-w-Cam'/>
         <page name='Recursion-w-Cam'/>
+        <page name='Graphs-with-Louis'/>
     </pages>
 </playground>
