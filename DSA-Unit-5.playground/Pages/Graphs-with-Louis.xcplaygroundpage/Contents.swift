@@ -37,7 +37,7 @@ func findRoute(_ start: Node, _ end: Node) -> Bool {
         queue.append(neighbor)
       }
     }
-    i+=1
+    i += 1
   }
 
   return false
@@ -53,7 +53,7 @@ class Node {
     // }
 
     init(_ id: String) {
-      self.id=id
+      self.id = id
     }
 }
 
