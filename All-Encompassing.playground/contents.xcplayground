@@ -11,11 +11,12 @@
         <page name='March-25-DSA'/>
         <page name='InsertionSort'/>
         <page name='March-9-LeetLeet'/>
-        <page name='LinkedList'/>
         <page name='MergeSort'/>
-        <page name='Queues'/>
-        <page name='QuickSort'/>
         <page name='Stacks'/>
+        <page name='Stacks-Review+Leetcode'/>
+        <page name='Queues'/>
+        <page name='LinkedList'/>
+        <page name='QuickSort'/>
         <page name='BinarySearch'/>
         <page name='DataStructures'/>
         <page name='CAMTrees'/>
@@ -27,7 +28,7 @@
         <page name='Recursion-w-Cam'/>
         <page name='Graphs-with-Louis'/>
         <page name='Graphs-Leetcode'/>
-        <page name='Stacks - Review'/>
         <page name='Graphs-Cam'/>
+        <page name='LeetCode-Easy-Q&apos;s'/>
     </pages>
 </playground>

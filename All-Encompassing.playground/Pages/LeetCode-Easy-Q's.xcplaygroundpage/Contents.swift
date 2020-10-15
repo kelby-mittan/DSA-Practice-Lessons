@@ -301,3 +301,116 @@ func restoreString(_ s: String, _ indices: [Int]) -> String {
     }
     return String(arr)
 }
+
+/*
+ 1512. Number of Good Pairs
+ Easy
+ 
+ Given an array of integers nums.
+
+ A pair (i,j) is called good if nums[i] == nums[j] and i < j.
+
+ Return the number of good pairs.
+
+ Example 1:
+
+ Input: nums = [1,2,3,1,1,3]
+ Output: 4
+ Explanation: There are 4 good pairs (0,3), (0,4), (3,4), (2,5) 0-indexed.
+ Example 2:
+
+ Input: nums = [1,1,1,1]
+ Output: 6
+ Explanation: Each pair in the array are good.
+ Example 3:
+
+ Input: nums = [1,2,3]
+ Output: 0
+ */
+
+func numIdenticalPairs(_ nums: [Int]) -> Int {
+//    var pairsCount = 0
+//
+//    for (i, iVal) in nums.enumerated() {
+//        for (j,jVal) in nums.enumerated() {
+//            if iVal == jVal && i != j {
+//                pairsCount += 1
+//            }
+//        }
+//    }
+//    return pairsCount / 2
+    
+    var pairsCount: [Int] = [0]
+    for i in 1..<nums.count {
+        pairsCount.append((pairsCount.last ?? 0) + i)
+    }
+    var dict = [Int: Int]() // num: count
+    for num in nums {
+        dict[num] = dict[num, default: 0] + 1
+    }
+    var result = 0 // count pairs
+    for (_, count) in dict {
+        result += pairsCount[count - 1]
+    }
+    return result
+}
+
+/*
+ 204. Count Primes
+ Easy
+ 
+ Count the number of prime numbers less than a non-negative number, n.
+
+ Example 1:
+
+ Input: n = 10
+ Output: 4
+ Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+ Example 2:
+
+ Input: n = 0
+ Output: 0
+ Example 3:
+
+ Input: n = 1
+ Output: 0
+ */
+
+func countPrimes(_ n: Int) -> Int {
+//    if n <= 2 {
+//        return 0
+//    }
+//    var notPrimeArr = Array(repeating: false, count: n))
+//    var count = 0
+//
+//    for i in 2..<n {
+//        if !notPrimeArr[i] {
+//            count += 1
+//            var j = 2
+//            while i * j < n {
+//                notPrimeArr[i * j] = true
+//                j += 1
+//            }
+//        }
+//    }
+//
+//    return count
+    var count = 0
+    var primes = Array(repeating: true, count: n)
+    var i = 2
+    
+    while i < n {
+        if primes[i] == true {
+            count += 1
+            var j = i * 2
+            while j < n {
+                primes[j] = false
+                j += i
+            }
+        }
+        i += 1
+    }
+    return count
+}
+
+countPrimes(10)
