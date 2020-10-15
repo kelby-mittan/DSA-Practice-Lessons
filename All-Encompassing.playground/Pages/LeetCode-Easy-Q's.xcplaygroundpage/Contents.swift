@@ -185,3 +185,119 @@ func getDecimalValue(_ head: ListNode?) -> Int {
     }
     return result
 }
+
+
+/*
+ 1480. Running Sum of 1d Array
+ Easy
+ 
+ Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+ 
+ Return the running sum of nums.
+ 
+ Example 1:
+ 
+ Input: nums = [1,2,3,4]
+ Output: [1,3,6,10]
+ Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+ Example 2:
+ 
+ Input: nums = [1,1,1,1,1]
+ Output: [1,2,3,4,5]
+ Explanation: Running sum is obtained as follows: [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1].
+ Example 3:
+ 
+ Input: nums = [3,1,2,10,1]
+ Output: [3,4,6,16,17]
+ */
+
+func runningSum(_ nums: [Int]) -> [Int] {
+    var arr = [Int]()
+    var sum = 0
+    for n in nums{
+        sum += n
+        arr.append(sum)
+    }
+    return arr
+}
+
+/*
+ 1470. Shuffle the Array
+ Easy
+
+ Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+
+ Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+
+ Example 1:
+
+ Input: nums = [2,5,1,3,4,7], n = 3
+ Output: [2,3,5,4,1,7]
+ Explanation: Since x1=2, x2=5, x3=1, y1=3, y2=4, y3=7 then the answer is [2,3,5,4,1,7].
+ Example 2:
+
+ Input: nums = [1,2,3,4,4,3,2,1], n = 4
+ Output: [1,4,2,3,3,2,4,1]
+ Example 3:
+
+ Input: nums = [1,1,2,2], n = 2
+ Output: [1,2,1,2]
+ */
+
+func shuffle(_ nums: [Int], _ n: Int) -> [Int] {
+    let arr = Array(nums[0..<n])
+    let arr2 = Array(nums[n..<nums.count])
+    var resultArr = [Int]()
+    for i in 0..<n{
+        resultArr.append(arr[i])
+        resultArr.append(arr2[i])
+    }
+    return resultArr
+}
+
+/*
+ 1528. Shuffle String
+ Easy
+
+ Given a string s and an integer array indices of the same length.
+
+ The string s will be shuffled such that the character at the ith position moves to indices[i] in the shuffled string.
+
+ Return the shuffled string.
+
+ Example 1:
+
+ Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
+ Output: "leetcode"
+ Explanation: As shown, "codeleet" becomes "leetcode" after shuffling.
+ 
+ Example 2:
+
+ Input: s = "abc", indices = [0,1,2]
+ Output: "abc"
+ Explanation: After shuffling, each character remains in its position.
+ 
+ Example 3:
+
+ Input: s = "aiohn", indices = [3,1,4,2,0]
+ Output: "nihao"
+ 
+ Example 4:
+
+ Input: s = "aaiougrt", indices = [4,0,2,6,7,3,1,5]
+ Output: "arigatou"
+ 
+ Example 5:
+
+ Input: s = "art", indices = [1,0,2]
+ Output: "rat"
+ */
+
+func restoreString(_ s: String, _ indices: [Int]) -> String {
+    var arr = Array<Character>(repeating: " ", count: indices.count)
+    let chars = Array(s)
+    for i in 0 ..< indices.count {
+     arr[indices[i]] = chars[i]
+    }
+    return String(arr)
+}
