@@ -10,49 +10,49 @@ import Foundation
  - Balancing
  
  - Nodes
-    - Like a linked list, a tree is composed of nodes.
-    - There are special types of nodes:
-        - root: The origin node, is the root of the tree.
-        - leaves: A node without any children is called a leaf.
+ - Like a linked list, a tree is composed of nodes.
+ - There are special types of nodes:
+ - root: The origin node, is the root of the tree.
+ - leaves: A node without any children is called a leaf.
  
-            2 <- Root
-           / \
-   Leaf   3   5
-              |
-              7 <- Leaf
+ 2 <- Root
+ / \
+ Leaf   3   5
+ |
+ 7 <- Leaf
  
-- Parent / Child relationship + Hierarchy:
-    - Every node has exactly one parent. With the exception of the root.
-    - In a general tree, there is no limit on the number of children that a node can have.
-    - There are exceptions. For example, a binary tree can have at most two children.
-    - Example:
-                           Depth   0              Drinks
-                                                 /      \
-                           Depth   1           Hot      Cold
-                                             /  |  \     |  \
-                           Depth   2  Tea Coffee Cocoa  Water Juice
+ - Parent / Child relationship + Hierarchy:
+ - Every node has exactly one parent. With the exception of the root.
+ - In a general tree, there is no limit on the number of children that a node can have.
+ - There are exceptions. For example, a binary tree can have at most two children.
+ - Example:
+ Depth   0              Drinks
+ /      \
+ Depth   1           Hot      Cold
+ /  |  \     |  \
+ Depth   2  Tea Coffee Cocoa  Water Juice
  
  - Traversing through Trees:
-    - Depth First
-    - Breadth First / Level Order Traversal
+ - Depth First
+ - Breadth First / Level Order Traversal
  
-    - Depth First:
-        - Visit each node until all paths are exhausted (until each node is visited).
-        - Accomplished with recursion.
+ - Depth First:
+ - Visit each node until all paths are exhausted (until each node is visited).
+ - Accomplished with recursion.
  
-    - Breadth First:
-        - A lateral approach to visiting each node.
-        - Start from the root, and visit each level in order from left to right.
-        - Uses a Queue.
+ - Breadth First:
+ - A lateral approach to visiting each node.
+ - Start from the root, and visit each level in order from left to right.
+ - Uses a Queue.
  
  - Binary Trees:
-    - They can have at most two children.
-    - Because of the above property, binary trees have access to three types of depth first traversal:
-        - In-order
-        - Post-order
-        - Pre-order
-    - Breadth First traversal is also possible.
-    
+ - They can have at most two children.
+ - Because of the above property, binary trees have access to three types of depth first traversal:
+ - In-order
+ - Post-order
+ - Pre-order
+ - Breadth First traversal is also possible.
+ 
  */
 class Queue<T> {
     
@@ -133,12 +133,12 @@ cheltree.children.append(yulitree)
 //    print(node.value)
 //}
 /*
-                                Maitree
-                                /     \
-                            Cheltree  Keltree
-                            / | |    / | | | \
-                           J  L Y   B  C J Ta Ti
-*/
+ Maitree
+ /     \
+ Cheltree  Keltree
+ / | |    / | | | \
+ J  L Y   B  C J Ta Ti
+ */
 class BinaryTreeNode<T> {
     
     public var value: T
@@ -192,11 +192,11 @@ extension BinaryTreeNode {
     
 }
 /*
-                     Maitree
-                     /     \
-                 Cheltree  Keltree
-                 /  |      /      \
-                J   L     B       Ti
+ Maitree
+ /     \
+ Cheltree  Keltree
+ /  |      /      \
+ J   L     B       Ti
  
  Pre-order Traversal: Self -> Left -> Right
  In-order Traversal: Left -> Self -> Right
@@ -231,27 +231,27 @@ extension BinaryTreeNode {
  Binary Search Trees
  
  - Binary Trees
-    - Each node can have at most two children.
-    - Children have parents.
+ - Each node can have at most two children.
+ - Children have parents.
  
  - Properties of binary search trees
-    - Left child values are less than parent node value.
-    - Right child values are greater than or equal to parent node value.
-    - The values in a binary search tree must be comparable!!!.!
+ - Left child values are less than parent node value.
+ - Right child values are greater than or equal to parent node value.
+ - The values in a binary search tree must be comparable!!!.!
  
  - Three common methods of a binary search tree:
-    - Insert
-    - Remove
-    - Search / Contains
+ - Insert
+ - Remove
+ - Search / Contains
  
  - Why a binary search tree?
-    - All of the above methods can be performed with a runtime of O(log n). This is ideal. We want this.
+ - All of the above methods can be performed with a runtime of O(log n). This is ideal. We want this.
  
  - Removal / Deletion / Obliteration
-    - Three cases:
-        - Removal of a leaf node.
-        - Removal of a node with one child.
-        - Removal of a node with two children.
+ - Three cases:
+ - Removal of a leaf node.
+ - Removal of a node with one child.
+ - Removal of a node with two children.
  
  */
 
@@ -280,15 +280,15 @@ extension BinaryNode: CustomStringConvertible {
     }
     
     public var description: String {
-      var str = ""
-      if let left = leftChild {
-          str += "(\(left.description) <- "
-      }
-      str += "\(value)"
-      if let right = rightChild {
-        str += " -> (\(right.description))"
-      }
-      return str
+        var str = ""
+        if let left = leftChild {
+            str += "(\(left.description) <- "
+        }
+        str += "\(value)"
+        if let right = rightChild {
+            str += " -> (\(right.description))"
+        }
+        return str
     }
     
 }
@@ -304,7 +304,7 @@ struct BinarySearchTree<T: Comparable> {
     
     // Public function that can be called
     public mutating func insert(_ value: T) {
-       root = insert(root, value)
+        root = insert(root, value)
     }
     
     // Helper function for insertion of binary node
@@ -322,21 +322,21 @@ struct BinarySearchTree<T: Comparable> {
         
         return node
     }
-//
-//    // Runtime is O(n)
-//    public func contains(_ value: T) -> Bool {
-//
-//        var exists = false // By default the value does not exist.
-//
-//        // Visits all nodes in the tree to see if the value exists.
-//        root?.inOrderTraversal({ (node) in
-//            if node.value == value {
-//                exists = true // Found the value.
-//            }
-//        })
-//
-//        return exists
-//    }
+    //
+    //    // Runtime is O(n)
+    //    public func contains(_ value: T) -> Bool {
+    //
+    //        var exists = false // By default the value does not exist.
+    //
+    //        // Visits all nodes in the tree to see if the value exists.
+    //        root?.inOrderTraversal({ (node) in
+    //            if node.value == value {
+    //                exists = true // Found the value.
+    //            }
+    //        })
+    //
+    //        return exists
+    //    }
     
     // Runtime is O(log n)
     public func betterContains(_ value: T) -> Bool {
@@ -406,33 +406,33 @@ struct BinarySearchTree<T: Comparable> {
 /*
  
  First call to remove (root, 64)
-    - root.value = 12
-    - root.rightChild = remove(root.rightChild, 64) => root.rightChild
+ - root.value = 12
+ - root.rightChild = remove(root.rightChild, 64) => root.rightChild
  Second call to remove (root.rightChild, 64)
-    - root.rightChild.value = 14
-    - root.rightChild = remove(root.rightChild.rightChild, 64) => root.rightChild.rightChild
+ - root.rightChild.value = 14
+ - root.rightChild = remove(root.rightChild.rightChild, 64) => root.rightChild.rightChild
  Third call to remove (root.rightChild.rightChild, 64)
-    - root.rightChild.rightChild.value = 23
-    - root.rightChild.rightChild = remove(493Node, 64) => 493Node
+ - root.rightChild.rightChild.value = 23
+ - root.rightChild.rightChild = remove(493Node, 64) => 493Node
  Fourth call to remove (493Node, 64)
-    - 493Node.value = 493
-    - 493Node.leftChild = remove(node64, 64) => nil
+ - 493Node.value = 493
+ - 493Node.leftChild = remove(node64, 64) => nil
  Fifth call to remove (Node64, 64)
-    - node64.value = 64
-    - return nil
-    
+ - node64.value = 64
+ - return nil
+ 
  */
 
 /* Insertion
-                    12
-                   /  \
-                       14
-                      /  \
-                          23
-                         /  \
-                            493
-                            /  \
-                           64  503
+ 12
+ /  \
+ 14
+ /  \
+ 23
+ /  \
+ 493
+ /  \
+ 64  503
  */
 
 var tree = BinarySearchTree<Int>()

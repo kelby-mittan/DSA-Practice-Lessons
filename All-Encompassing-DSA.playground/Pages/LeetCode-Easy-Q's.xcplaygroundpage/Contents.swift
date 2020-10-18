@@ -34,6 +34,8 @@ func numJewelsInStones(_ J: String, _ S: String) -> Int {
     return num
 }
 
+//=====================================================================================
+
 /*
  1313. Decompress Run-Length Encoded List
  Easy
@@ -77,6 +79,8 @@ func decompressRLElist(_ nums: [Int]) -> [Int] {
     return resultArr
 }
 
+//=====================================================================================
+
 /*
  1389. Create Target Array in the Given Order
  Easy
@@ -89,9 +93,7 @@ func decompressRLElist(_ nums: [Int]) -> [Int] {
  Return the target array.
  
  It is guaranteed that the insertion operations will be valid.
- 
- 
- 
+  
  Example 1:
  
  Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
@@ -132,6 +134,8 @@ func createTargetArray(_ nums: [Int], _ index: [Int]) -> [Int] {
     return resultsArr
 }
 
+//=====================================================================================
+
 /*
  1290. Convert Binary Number in a Linked List to Integer
  Easy
@@ -140,10 +144,7 @@ func createTargetArray(_ nums: [Int], _ index: [Int]) -> [Int] {
  
  Return the decimal value of the number in the linked list.
  
- 
- 
  Example 1:
- 
  
  Input: head = [1,0,1]
  Output: 5
@@ -221,6 +222,9 @@ func runningSum(_ nums: [Int]) -> [Int] {
     return arr
 }
 
+//=====================================================================================
+
+
 /*
  1470. Shuffle the Array
  Easy
@@ -254,6 +258,8 @@ func shuffle(_ nums: [Int], _ n: Int) -> [Int] {
     }
     return resultArr
 }
+
+//=====================================================================================
 
 /*
  1528. Shuffle String
@@ -301,6 +307,9 @@ func restoreString(_ s: String, _ indices: [Int]) -> String {
     }
     return String(arr)
 }
+
+//=====================================================================================
+
 
 /*
  1512. Number of Good Pairs
@@ -354,6 +363,8 @@ func numIdenticalPairs(_ nums: [Int]) -> Int {
     }
     return result
 }
+
+//=====================================================================================
 
 /*
  204. Count Primes
@@ -414,3 +425,36 @@ func countPrimes(_ n: Int) -> Int {
 }
 
 countPrimes(10)
+
+//=====================================================================================
+//                          Twitter Mock Q
+//=====================================================================================
+
+// Given a string str, a duplicate removal consists of choosing two adjacent and equal letters, and removing them.
+
+// We repeatedly make duplicate removals on S until we no longer can.
+
+// Return the final string after all such duplicate removals have been made. It is guaranteed the answer is unique.
+
+// The input string will only contain lowercase letters in the set [a-z]*
+
+// let input = "aabc"
+// "bc"
+/*
+1 - start initiating an empty array of characters
+2 - iterate through the input string
+3 - compare the character I have from iterating
+*/
+
+func removeAdjacentDuplicates(_ str: String) -> String {
+  var stack = [Character]()
+  guard !str.isEmpty else { return "" }
+  for char in str {
+    if stack.last == char {
+      stack.removeLast()
+    } else {
+      stack.append(char)
+    }
+  }
+  return String(stack)
+}

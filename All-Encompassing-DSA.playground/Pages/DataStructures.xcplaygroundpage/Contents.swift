@@ -233,3 +233,17 @@ extension BinaryTreeNode {
     }
     
 }
+
+
+func elementsSame(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
+    
+    return []
+}
+
+let set1 = Set([1,2,3,4])
+let set2 = Set([1,2,5,9])
+
+let set3 = set1.intersection(set2)
+
+print("Hi")
+print(Array(set3))
