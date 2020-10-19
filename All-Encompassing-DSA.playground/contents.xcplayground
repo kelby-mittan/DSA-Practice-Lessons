@@ -8,6 +8,7 @@
         <page name='Stacks'/>
         <page name='Stacks-Review+Leetcode'/>
         <page name='Queues'/>
+        <page name='Queue-Review-Optimal'/>
         <page name='LinkedList'/>
         <page name='CAMTrees'/>
         <page name='Binary-Tree-Depth'/>
