@@ -302,3 +302,177 @@ graph.add(.undirected, from: kelbyVertex, to: cameronVertex, weight: 95)
 graph.add(.undirected, from: youDudeVertex, to: davidVertex, weight: 55)
 
 print(graph)
+
+/*
+ Graph Traversal
+ 
+ - Breadth-First Traversal:
+    - You visit every neighbor of a given vertex, before you visit your neighbor's neighbors.
+ 
+    Implementation:
+        - We will use a queue to keep track of the neighbors of our vertices. We use a queue to preserve the order of visiting our neighbors before our neighbor's neighbors.
+        - We will use a set to keep track of the vertices that we have already visited. If we visit a vertex once, we don't want to revisit it.
+        - We will use an array to return the vertices in the order that we visited them.
+ 
+        1. Enqueue our input vertex (our function takes in a vertex). We are also going to add that vertex to our array, and to our set.
+        2. We'll create a while loop that will continue to loop so long as there are vertices to dequeue from our queue.
+        3. For each vertex we dequeue from our queue, we will find the edges, and place them in our queue, array, and set, if we have not already visited them.
+        4. Repeat step 3 until queue is empty.
+        5. Return our array of vertices.
+ 
+ - Depth-First Traversal:
+    - Follows a path until the end, then backtracks and visits unvisited paths.
+ 
+    Implementation:
+        - We require a stack to keep track of the path we have followed thus far.
+        - We require a set to keep track of the vertices that we have already visited.
+        - We require an array to keep track preserve the order of the vertices we visit.
+ 
+        1. Push our input vertex (our function takes in a vertex) onto our stack. We are also going to add our vertex to our resultArr and our set.
+        2. We'll create a while loop that continues so long as there are vertices on it to peek at.
+        3. For a given peeked vertex, we'll find the first edge, and place its destination vertex on the stack if we have not already seen it. We also place said vertex in our set, and append it to our array.
+        4. If we have already visited all of the neighbors of our peeked vertex, we pop it from the stack.
+        5. Repeats steps 3 and 4 until our stack is empty.
+        6. Return our result array.
+        
+ */
+
+public struct Queue<T> {
+    private var queue: [T] = []
+    
+    public var isEmpty: Bool {
+        return queue.isEmpty
+    }
+    
+    public mutating func enqueue(_ element: T) {
+        queue.append(element)
+    }
+    
+    @discardableResult
+    public mutating func dequeue() -> T? {
+        guard !isEmpty else { return nil }
+        return queue.removeFirst()
+    }
+}
+
+public struct Stack<T> {
+    private var stack: [T] = []
+    
+    public var isEmpty: Bool {
+        return stack.isEmpty
+    }
+    
+    public var peek: T? {
+        return stack.last
+    }
+    
+    public mutating func push(_ element: T) {
+        stack.append(element)
+    }
+    
+    public mutating func pop() -> T? {
+        return stack.popLast()
+    }
+}
+
+extension Graph where T: Hashable {
+    
+    public func breadthFirstTraversal(from vertex: Vertex<T>) -> [Vertex<T>] {
+        // Return an array with original vertex if the original vertex has no edges.
+        guard !edges(from: vertex).isEmpty else { return [vertex] }
+        
+        var vertexQueue = Queue<Vertex<T>>()
+        var visitedVertices = Set<Vertex<T>>()
+        var resultArr: [Vertex<T>] = []
+        
+        vertexQueue.enqueue(vertex)
+        visitedVertices.insert(vertex)
+        resultArr.append(vertex)
+        
+        while let dequeuedVertex = vertexQueue.dequeue() {
+            
+            // Same as for edge in edges
+            // Alternative to for loop
+            edges(from: dequeuedVertex).forEach { edge in
+                // Check if we have visited the neighbors of our dequeued vertex
+                if !visitedVertices.contains(edge.destination) {
+                    visitedVertices.insert(edge.destination) // Add neighbor to visited set
+                    vertexQueue.enqueue(edge.destination) // Add neighbor to queue
+                    resultArr.append(edge.destination) // Append neighbor to resultArr
+                }
+            }
+        }
+        
+        return resultArr
+    }
+    
+    public func depthFirstTraversal(from vertex: Vertex<T>) -> [Vertex<T>] {
+        guard !edges(from: vertex).isEmpty else { return [vertex] }
+        
+        var vertexStack = Stack<Vertex<T>>()
+        var visitedVertices = Set<Vertex<T>>()
+        var resultArr: [Vertex<T>] = []
+        
+        vertexStack.push(vertex)
+        visitedVertices.insert(vertex)
+        resultArr.append(vertex)
+        
+        while let peekedVertex = vertexStack.peek {
+            
+            // Find the first neighbor that we have yet to visit
+            let neighbor = edges(from: peekedVertex)
+                .filter({ !visitedVertices.contains($0.destination)})
+                .first?.destination
+            
+            // If the neighbor exists, push onto the stack, insert it into the visited vertices, and append it to our resultArr.
+            if let firstNeighbor = neighbor {
+                vertexStack.push(firstNeighbor)
+                visitedVertices.insert(firstNeighbor)
+                resultArr.append(firstNeighbor)
+            } else {
+                // If there are no neighbors that we have yet to visit, pop the vertex from the stack (i.e. backtrack).
+                vertexStack.pop()
+            }
+        }
+        
+        return resultArr
+    }
+}
+
+// A graph representing some office supplies and the likelihood that two given items will be purchased together.
+var newGraph = AdjacencyList<String>()
+
+let chair = newGraph.createVertex(data: "Chair")
+let desk = newGraph.createVertex(data: "Desk")
+let stapler = newGraph.createVertex(data: "Stapler")
+let looseleafPaper = newGraph.createVertex(data: "LooseleafPaper")
+let ballpointPen = newGraph.createVertex(data: "BallpointPen")
+let gelPen = newGraph.createVertex(data: "GelPen")
+let mechanicalPencil = newGraph.createVertex(data: "MechanicalPencil")
+let paperclip = newGraph.createVertex(data: "Paperclip")
+let no2Pencil = newGraph.createVertex(data: "No.2Pencil")
+let crayons = newGraph.createVertex(data: "Crayons")
+
+newGraph.addUndirectedEdge(between: desk, and: chair, weight: 8.0)
+newGraph.addUndirectedEdge(between: crayons, and: looseleafPaper, weight: 5.0)
+newGraph.addUndirectedEdge(between: desk, and: stapler, weight: 1.0)
+newGraph.addUndirectedEdge(between: paperclip, and: looseleafPaper, weight: 7.0)
+newGraph.addUndirectedEdge(between: crayons, and: no2Pencil, weight: 8.5)
+newGraph.addUndirectedEdge(between: ballpointPen, and: gelPen, weight: 5.0)
+newGraph.addUndirectedEdge(between: mechanicalPencil, and: looseleafPaper, weight: 10.0)
+newGraph.addUndirectedEdge(between: no2Pencil, and: looseleafPaper, weight: 9.0)
+newGraph.addUndirectedEdge(between: stapler, and: looseleafPaper, weight: 7.5)
+newGraph.addUndirectedEdge(between: paperclip, and: stapler, weight: 6.0)
+newGraph.addUndirectedEdge(between: ballpointPen, and: looseleafPaper, weight: 10.0)
+
+let visitedVertices = newGraph.breadthFirstTraversal(from: looseleafPaper)
+visitedVertices.forEach{ vertex in
+    print(vertex.data, terminator: " ")
+}
+
+print()
+
+let dVertices = newGraph.depthFirstTraversal(from: looseleafPaper)
+dVertices.forEach{ vertex in
+    print(vertex.data, terminator: " ")
+}

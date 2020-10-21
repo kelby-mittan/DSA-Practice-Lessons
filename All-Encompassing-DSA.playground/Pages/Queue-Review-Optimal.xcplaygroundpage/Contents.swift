@@ -71,6 +71,11 @@ queue.front // Bob
 
 queue.count // 3
 
+queue.dequeue()
+queue.dequeue()
+queue.dequeue()
+queue.dequeue()
+
 class Node<T: Equatable>: Equatable {
   var value: T
   var next: Node<T>?
