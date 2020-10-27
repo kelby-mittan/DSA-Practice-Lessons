@@ -448,3 +448,120 @@ func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
     }
     return index
 }
+
+//=====================================================================================
+
+/*
+ 1436. Destination City
+ Easy
+
+ You are given the array paths, where paths[i] = [cityAi, cityBi] means there exists a direct path going from cityAi to cityBi. Return the destination city, that is, the city without any path outgoing to another city.
+
+ It is guaranteed that the graph of paths forms a line without any loop, therefore, there will be exactly one destination city.
+
+  
+
+ Example 1:
+
+ Input: paths = [["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]
+ Output: "Sao Paulo"
+ Explanation: Starting at "London" city you will reach "Sao Paulo" city which is the destination city. Your trip consist of: "London" -> "New York" -> "Lima" -> "Sao Paulo".
+ Example 2:
+
+ Input: paths = [["B","C"],["D","B"],["C","A"]]
+ Output: "A"
+ Explanation: All possible trips are:
+ "D" -> "B" -> "C" -> "A".
+ "B" -> "C" -> "A".
+ "C" -> "A".
+ "A".
+ Clearly the destination city is "A".
+ Example 3:
+
+ Input: paths = [["A","Z"]]
+ Output: "Z"
+ */
+
+func destCity(_ paths: [[String]]) -> String {
+    var pathDict = [String:String]()
+
+    for path in paths {
+        pathDict[path[0]] = path[1]
+    }
+
+    for dest in pathDict.values {
+        if pathDict[dest] == nil {
+            return dest
+        }
+    }
+    return "IDK"
+}
+
+//=====================================================================================
+
+/*
+ 657. Robot Return to Origin
+ Easy
+
+ There is a robot starting at position (0, 0), the origin, on a 2D plane. Given a sequence of its moves, judge if this robot ends up at (0, 0) after it completes its moves.
+
+ The move sequence is represented by a string, and the character moves[i] represents its ith move. Valid moves are R (right), L (left), U (up), and D (down). If the robot returns to the origin after it finishes all of its moves, return true. Otherwise, return false.
+
+ Note: The way that the robot is "facing" is irrelevant. "R" will always make the robot move to the right once, "L" will always make it move left, etc. Also, assume that the magnitude of the robot's movement is the same for each move.
+
+ Example 1:
+
+ Input: moves = "UD"
+ Output: true
+ Explanation: The robot moves up once, and then down once. All moves have the same magnitude, so it ended up at the origin where it started. Therefore, we return true.
+ Example 2:
+
+ Input: moves = "LL"
+ Output: false
+ Explanation: The robot moves left twice. It ends up two "moves" to the left of the origin. We return false because it is not at the origin at the end of its moves.
+ Example 3:
+
+ Input: moves = "RRDD"
+ Output: false
+ Example 4:
+
+ Input: moves = "LDRRLRUULR"
+ Output: false
+ */
+
+func judgeCircle(_ moves: String) -> Bool {
+//         var dict = [Character:Int]()
+    
+//         for move in moves {
+//             if dict[move] == nil {
+//                 dict[move] = 1
+//             } else {
+//                 dict[move]! += 1
+//             }
+//         }
+//         return dict["L"] == dict["R"] && dict["U"] == dict["D"]
+        let moveChars = Array(moves)
+        var posX = 0
+        var posY = 0
+        
+        for char in moveChars {
+            switch char {
+            case "R":
+                posX += 1
+            case "L":
+                posX -= 1
+            case "U":
+                posY -= 1
+            case "D":
+                posY += 1
+            default:
+                break
+            }
+        }
+        
+        if posX == 0 && posY == 0 {
+            return true
+        }
+        
+        return false
+    }
