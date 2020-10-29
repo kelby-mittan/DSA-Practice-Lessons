@@ -3,5 +3,6 @@
     <pages>
         <page name='LeetCode-Easy-Pt.1'/>
         <page name='LeetCode-Easy-Pt.2'/>
+        <page name='HackerRank-Q&apos;s'/>
     </pages>
 </playground>
