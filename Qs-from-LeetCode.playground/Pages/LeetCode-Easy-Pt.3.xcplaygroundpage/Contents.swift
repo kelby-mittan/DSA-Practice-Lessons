@@ -238,3 +238,72 @@ func busyStudent(_ startTime: [Int], _ endTime: [Int], _ queryTime: Int) -> Int 
     }
     return numStudents
 }
+
+//==================================================================================
+
+/*
+ 905. Sort Array By Parity
+ Easy
+
+ Given an array A of non-negative integers, return an array consisting of all the even elements of A, followed by all the odd elements of A.
+
+ You may return any answer array that satisfies this condition.
+
+ Example 1:
+
+ Input: [3,1,2,4]
+ Output: [2,4,3,1]
+ The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
+ */
+
+func sortArrayByParity(_ A: [Int]) -> [Int] {
+    var result = [Int]()
+
+    for i in 0..<A.count {
+        if A[i] % 2 == 0 {
+            result.insert(A[i], at: 0)
+        } else {
+            result.append(A[i])
+        }
+    }
+
+    return result
+
+}
+
+sortArrayByParity([3,1,2,4])
+
+//====================================================================================
+
+/*
+ 1299. Replace Elements with Greatest Element on Right Side
+ Easy
+
+ Given an array arr, replace every element in that array with the greatest element among the elements to its right, and replace the last element with -1.
+
+ After doing so, return the array.
+
+  
+
+ Example 1:
+
+ Input: arr = [17,18,5,4,6,1]
+ Output: [18,6,6,6,1,-1]
+ */
+
+func replaceElements(_ arr: [Int]) -> [Int] {
+    var resultArray = [Int]()
+    resultArray = arr
+    var highestFromRight = resultArray[resultArray.count - 1]
+    resultArray[resultArray.count - 1] = -1
+
+    for i in (0..<resultArray.count - 1).reversed(){
+        let temp = resultArray[i]
+        resultArray[i] = highestFromRight
+
+        if highestFromRight < temp{
+            highestFromRight = temp
+        }
+    }
+    return resultArray
+}
