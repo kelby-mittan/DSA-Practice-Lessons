@@ -57,7 +57,6 @@ func getArea(_ grid: [[Int]]) -> Int {
 
 func areaHelper(_ x: Int, _ y: Int, _ width: Int, _ height: Int, _ grid: [[Int]]) -> Bool {
     
-    
     for i in x..<width+x {
         for j in y..<height+y {
             if i >= grid.count || j >= grid.count {
@@ -71,76 +70,76 @@ func areaHelper(_ x: Int, _ y: Int, _ width: Int, _ height: Int, _ grid: [[Int]]
     return true
 }
 
-print(getArea([[1,1,1,],[1,1,0],[1,1,1,]]))
+print(getArea([[1,1,1,],[1,1,0],[1,1,1]]))
 
-func areaOfMatrix(_ grid: [[Int]]) -> Int {
-    var rowDict: [Int:Int] = [:]
-    var collumnDict: [Int:Int] = [:]
-    
-    for (i,arr) in grid.enumerated() {
-        for (j,num) in arr.enumerated() {
-            if num == 1 {
-                
-            }
-        }
-    }
-    return 0
-}
-
-func divisible(s: String, t: String) -> Int {
-  var count1 = 0
-  var count2 = 0
-  var newStr = ""
-  var dict = [[Character: Int]()]
-  var newArr = [String]()
-  if s != t {
-    for i in s {
-      count1 += 1
-      for (index, j) in t.enumerated() {
-//        count2 += 1
-//        newStr = newStr + "\(j)"
-//        print("newStr: \(newStr)")
-        if j == i {
-//          print("i: \(i) j: \(j)")
-//          newStr = newStr + "\(j)"
-//          print("newStr: \(newStr)")
-        }
-    }
-    }
-//    if newArr[0] == newStr {
-//      return newStr.count
+//func areaOfMatrix(_ grid: [[Int]]) -> Int {
+//    var rowDict: [Int:Int] = [:]
+//    var collumnDict: [Int:Int] = [:]
+//
+//    for (i,arr) in grid.enumerated() {
+//        for (j,num) in arr.enumerated() {
+//            if num == 1 {
+//
+//            }
+//        }
 //    }
-    print("count1 : \(count1)")
-    print("count2 : \(count2)")
-    if count2 * 2 == count1 || count2 == count1 {
-      return count2
-    }
-  } else {
-    return t.count
-  }
-  return -1
-}
-
-func div(_ s: String, _ t: String) -> Int {
-    
-    let arrS = Array(s)
-    let arrT = Array(t)
-    var count = 0
-    for (i, letter) in arrS.enumerated() {
-        if arrT.first == letter {
-            if arrT.count - i >= arrT.count {
-                if arrS[i..<arrT.count] == arrT[0..<arrT.count] {
-                    count += 1
-                }
-            }
-        }
-    }
-    return count
-}
-
-var arr = Array("abc")
-
-let newArr = arr[1...arr.count-1]
-
-div("rbrbarbrba", "rbrb")
+//    return 0
+//}
+//
+//func divisible(s: String, t: String) -> Int {
+//  var count1 = 0
+//  var count2 = 0
+//  var newStr = ""
+//  var dict = [[Character: Int]()]
+//  var newArr = [String]()
+//  if s != t {
+//    for i in s {
+//      count1 += 1
+//      for (index, j) in t.enumerated() {
+////        count2 += 1
+////        newStr = newStr + "\(j)"
+////        print("newStr: \(newStr)")
+//        if j == i {
+////          print("i: \(i) j: \(j)")
+////          newStr = newStr + "\(j)"
+////          print("newStr: \(newStr)")
+//        }
+//    }
+//    }
+////    if newArr[0] == newStr {
+////      return newStr.count
+////    }
+//    print("count1 : \(count1)")
+//    print("count2 : \(count2)")
+//    if count2 * 2 == count1 || count2 == count1 {
+//      return count2
+//    }
+//  } else {
+//    return t.count
+//  }
+//  return -1
+//}
+//
+//func div(_ s: String, _ t: String) -> Int {
+//
+//    let arrS = Array(s)
+//    let arrT = Array(t)
+//    var count = 0
+//    for (i, letter) in arrS.enumerated() {
+//        if arrT.first == letter {
+//            if arrT.count - i >= arrT.count-1 {
+//                if arrS[i..<arrT.count] == arrT[0..<arrT.count] {
+//                    count += 1
+//                }
+//            }
+//        }
+//    }
+//    return count
+//}
+//
+//var arr = Array("abc")
+//
+//let newArr = arr[1...arr.count-1]
+//
+//div("rbrbarbrba", "rbrb")
 

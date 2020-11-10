@@ -100,3 +100,9 @@ hashTable.update(value: 25, forKey: "Eric")
 hashTable.count
 
 print(hashTable)
+
+let companiesToApply = ["Elevate","Wikipedia","Hulu","SoundCloud"]//[“Elevate”, “Wikipedia”, “Hulu”, “SoundCloud”]
+// adding companies from the “companiesToApply” array to
+// the jobSeachDict where the value is “Need to Apply”
+
+
