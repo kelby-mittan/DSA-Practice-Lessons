@@ -93,3 +93,131 @@ func maxNumberOfBalloons(_ text: String) -> Int {
 }
 
 maxNumberOfBalloons("loonbalxballpoon")
+
+//=================================================================================
+
+/*
+ 122. Best Time to Buy and Sell Stock II
+ Easy
+
+ Say you have an array prices for which the ith element is the price of a given stock on day i.
+
+ Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+ Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+ Example 1:
+
+ Input: [7,1,5,3,6,4]
+ Output: 7
+ Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+              Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+ Example 2:
+
+ Input: [1,2,3,4,5]
+ Output: 4
+ Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+              Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+              engaging multiple transactions at the same time. You must sell before buying again.
+ Example 3:
+
+ Input: [7,6,4,3,1]
+ Output: 0
+ Explanation: In this case, no transaction is done, i.e. max profit = 0.
+ */
+
+func maxProfit(_ prices: [Int]) -> Int {
+    if prices.count == 0 {
+        return 0
+    }
+    var profit = 0
+    
+    for i in 1..<prices.count {
+        if prices[i] > prices[i-1] {
+            profit += prices[i] - prices[i-1]
+        }
+    }
+    
+    return profit
+}
+
+maxProfit([7,6,4,3,1])
+
+//================================================================================
+
+/*
+ 13. Roman to Integer
+ Easy
+
+ Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+ Symbol       Value
+ I             1
+ V             5
+ X             10
+ L             50
+ C             100
+ D             500
+ M             1000
+ For example, 2 is written as II in Roman numeral, just two one's added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+
+ Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+ I can be placed before V (5) and X (10) to make 4 and 9.
+ X can be placed before L (50) and C (100) to make 40 and 90.
+ C can be placed before D (500) and M (1000) to make 400 and 900.
+ Given a roman numeral, convert it to an integer.
+
+  
+
+ Example 1:
+
+ Input: s = "III"
+ Output: 3
+ Example 2:
+
+ Input: s = "IV"
+ Output: 4
+ Example 3:
+
+ Input: s = "IX"
+ Output: 9
+ Example 4:
+
+ Input: s = "LVIII"
+ Output: 58
+ Explanation: L = 50, V= 5, III = 3.
+ Example 5:
+
+ Input: s = "MCMXCIV"
+ Output: 1994
+ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+ */
+
+func romanToInt(_ s: String) -> Int {
+        var result = 0
+    let dict: [Character : Int] =
+        ["I" : 1, "V" : 5, "X" : 10, "L" : 50, "C" : 100, "D" : 500, "M" : 1000]
+
+    var strArr = [Character]()
+
+    for char in s {
+        strArr.append(char)
+    }
+    
+    var prev = 0
+
+    for i in 0..<strArr.count {
+        
+        if prev >= dict[strArr[i]]! {
+            result += dict[strArr[i]]!
+        } else {
+            result = result - (2 * prev) + dict[strArr[i]]!
+        }
+        prev = dict[strArr[i]]!
+        
+    }
+    return result
+}
+
+romanToInt("LVIII")
