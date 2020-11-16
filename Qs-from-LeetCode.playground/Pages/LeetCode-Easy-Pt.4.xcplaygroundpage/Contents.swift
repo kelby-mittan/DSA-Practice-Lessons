@@ -168,8 +168,6 @@ maxProfit([7,6,4,3,1])
  C can be placed before D (500) and M (1000) to make 400 and 900.
  Given a roman numeral, convert it to an integer.
 
-  
-
  Example 1:
 
  Input: s = "III"
@@ -221,3 +219,60 @@ func romanToInt(_ s: String) -> Int {
 }
 
 romanToInt("LVIII")
+
+//================================================================================
+
+/*
+ 1160. Find Words That Can Be Formed by Characters
+ Easy
+
+ You are given an array of strings words and a string chars.
+
+ A string is good if it can be formed by characters from chars (each character can only be used once).
+
+ Return the sum of lengths of all good strings in words.
+
+  
+
+ Example 1:
+
+ Input: words = ["cat","bt","hat","tree"], chars = "atach"
+ Output: 6
+ Explanation:
+ The strings that can be formed are "cat" and "hat" so the answer is 3 + 3 = 6.
+ Example 2:
+
+ Input: words = ["hello","world","leetcode"], chars = "welldonehoneyr"
+ Output: 10
+ Explanation:
+ The strings that can be formed are "hello" and "world" so the answer is 5 + 5 = 10.
+ */
+
+func countCharacters(_ words: [String], _ chars: String) -> Int {
+    var occDict: [Character: Int] = [:]
+    var sum = 0
+
+    for ch in chars {
+        occDict[ch, default: 0] += 1
+    }
+
+    for word in words {
+        var tempDict = occDict
+        var validCount = 0
+
+        for ch in word {
+            if tempDict[ch, default: 0] > 0 {
+                tempDict[ch, default: 0] -= 1
+                validCount += 1
+            }
+        }
+
+        if validCount == word.count {
+            sum += word.count
+        }
+    }
+
+    return sum
+}
+
+countCharacters(["cat","bt","hat","tree"], "atach")
