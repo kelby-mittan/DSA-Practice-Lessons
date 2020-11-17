@@ -155,3 +155,59 @@ func findDuplicates(_ nums: [Int]) -> [Int] {
 }
 
 findDuplicates([4,3,2,7,8,2,3,1])
+
+//==============================================================================
+
+/*
+ 912. Sort an Array
+ Medium
+
+ Given an array of integers nums, sort the array in ascending order.
+
+ Example 1:
+
+ Input: nums = [5,2,3,1]
+ Output: [1,2,3,5]
+ Example 2:
+
+ Input: nums = [5,1,1,2,0,0]
+ Output: [0,0,1,1,2,5]
+ */
+
+func sortArray(_ nums: [Int]) -> [Int] {
+        var varArr = nums
+    quicksortLomuto(&varArr, low: 0, high: varArr.count - 1)
+    return varArr
+}
+
+func lomutoPartition(_ arr: inout [Int], low: Int, high: Int) -> Int {
+    
+    let pivot = arr[high]
+    var i = low
+    
+    // iterate through the array using j variable as our marker
+    
+    for j in low..<high {
+        if arr[j] <= pivot {
+            // swap and increment i
+            arr.swapAt(i, j)
+            i += 1
+        }
+    }
+    arr.swapAt(i, high)
+    return i
+}
+
+func quicksortLomuto(_ arr: inout [Int], low: Int, high: Int) {
+    if low < high {
+        // get a new pivot
+        let pivot = lomutoPartition(&arr, low: low, high: high)
+        // recursive calls
+        // left array
+        quicksortLomuto(&arr, low: low, high: pivot - 1)
+        // right array
+        quicksortLomuto(&arr, low: pivot + 1, high: high)
+    }
+}
+
+sortArray([4,2,6,7,84,3,2,5])
