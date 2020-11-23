@@ -125,23 +125,23 @@ sumEvenGrandparent(rootNode)
 /*
  442. Find All Duplicates in an Array
  Medium
-
+ 
  Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
-
+ 
  Find all the elements that appear twice in this array.
-
+ 
  Could you do it without extra space and in O(n) runtime?
-
+ 
  Example:
  Input:
  [4,3,2,7,8,2,3,1]
-
+ 
  Output:
  [2,3]
  */
 
 func findDuplicates(_ nums: [Int]) -> [Int] {
-
+    
     var occDict = [Int:Int]()
     var resultArr = [Int]()
     for num in nums {
@@ -161,21 +161,21 @@ findDuplicates([4,3,2,7,8,2,3,1])
 /*
  912. Sort an Array
  Medium
-
+ 
  Given an array of integers nums, sort the array in ascending order.
-
+ 
  Example 1:
-
+ 
  Input: nums = [5,2,3,1]
  Output: [1,2,3,5]
  Example 2:
-
+ 
  Input: nums = [5,1,1,2,0,0]
  Output: [0,0,1,1,2,5]
  */
 
 func sortArray(_ nums: [Int]) -> [Int] {
-        var varArr = nums
+    var varArr = nums
     quicksortLomuto(&varArr, low: 0, high: varArr.count - 1)
     return varArr
 }
@@ -211,3 +211,46 @@ func quicksortLomuto(_ arr: inout [Int], low: Int, high: Int) {
 }
 
 sortArray([4,2,6,7,84,3,2,5])
+
+//=============================================================================
+
+/*
+ 525. Contiguous Array
+ Medium
+ 
+ Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1.
+ 
+ Example 1:
+ Input: [0,1]
+ Output: 2
+ Explanation: [0, 1] is the longest contiguous subarray with equal number of 0 and 1.
+ 
+ Example 2:
+ Input: [0,1,0]
+ Output: 2
+ Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal number of 0 and 1.
+ */
+
+func findMaxLength(_ nums: [Int]) -> Int {
+    var count = 0
+    var maxLength = 0
+    var freqDict = [Int: Int]() // [count: index]
+    freqDict[0] = -1
+    // if we have seen the count before we are looking at the contiguous subarray
+    for (currentIndex, num) in nums.enumerated() {
+        if num == 0 {
+            count -= 1
+        } else {
+            count += 1
+        }
+        // keep track of seen counts and indices
+        if let firstSeenIndex = freqDict[count] {
+            maxLength = max(maxLength, currentIndex - firstSeenIndex)
+        } else {
+            freqDict[count] = currentIndex // first time we have seen this count
+        }
+    }
+    return maxLength
+}
+
+findMaxLength([0,1,0])
