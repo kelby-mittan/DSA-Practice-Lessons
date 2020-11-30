@@ -200,3 +200,4 @@ class SubrectangleQueries {
 var obj = SubrectangleQueries([[1,1,1],[2,2,2],[3,3,3]])
 obj.getValue(0, 0)
 print(obj.updateSubrectangle(0, 0, 2, 2, 100))
+
