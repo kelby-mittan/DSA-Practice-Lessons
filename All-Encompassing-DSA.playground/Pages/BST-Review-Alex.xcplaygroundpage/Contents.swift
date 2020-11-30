@@ -61,6 +61,40 @@ func search(_ root: BinaryTreeNode?, _ value: Int) -> Bool {
     return false
 }
 
+func delete(_ root: BinaryTreeNode?, _ value: Int) -> BinaryTreeNode? {
+    
+    guard let root = root else { return nil }
+    
+    if value < root.value {
+        root.left = delete(root.left, value)
+    }
+    
+    else if value > root.value {
+        root.right = delete(root.right, value)
+    }
+    
+    else {
+        if root.left == nil {
+            return root.right
+        } else if root.right == nil {
+            return root.left
+        }
+        
+        root.value = minValue(root.right)
+        
+        root.right = delete(root.right, root.value)
+    }
+    return root
+}
+
+func minValue(_ root: BinaryTreeNode?) -> Int {
+    
+    if root?.left == nil {
+        return root?.value ?? 0
+    }
+    return minValue(root?.left)
+}
+
 // test binary search tree functionality
 
 /*
@@ -79,12 +113,15 @@ insert(rootNode, 9)
 insert(rootNode, 11)
 insert(rootNode, 16)
 
+minValue(rootNode)
+delete(rootNode, 5)
 // test insert and in-order traversal
 print("in-order traversal after inserting nodes")
-inOrderTraversal(rootNode) // 5 7 9 10 11 13 16
+inOrderTraversal(rootNode) // 7 9 10 11 13 16
 print("\n")
 
 // test search
 print("searching...")
 print(search(rootNode, 7)) // true
 print(search(rootNode, 0)) // false
+
