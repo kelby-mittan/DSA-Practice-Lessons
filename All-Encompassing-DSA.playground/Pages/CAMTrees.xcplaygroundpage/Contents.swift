@@ -54,6 +54,7 @@ import Foundation
  - Breadth First traversal is also possible.
  
  */
+
 class Queue<T> {
     
     private var queue: [T] = []
@@ -190,6 +191,27 @@ extension BinaryTreeNode {
         visit(self)
     }
     
+    func height<T>(_ root: BinaryTreeNode<T>?) -> Int {
+        guard let root = root else { return 0 }
+        var leftHeight = 0
+        var rightHeight = 0
+        leftHeight = height(root.leftChild)
+        rightHeight = height(root.rightChild)
+        return 1 + max(leftHeight, rightHeight)
+    }
+    
+    public func diameter<T>(_ root: BinaryTreeNode<T>?) -> Int {
+        
+        guard let root = root else { return 0 }
+        
+        let leftHeight = height(root.leftChild)
+        let rightHeight = height(root.rightChild)
+        
+        let leftDiameter = diameter(root.leftChild)
+        let rightDiameter = diameter(root.rightChild)
+        
+        return max(1 + leftHeight + rightHeight, leftDiameter, rightDiameter)
+    }
 }
 /*
  Maitree
