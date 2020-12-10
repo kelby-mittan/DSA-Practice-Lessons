@@ -25,18 +25,12 @@ func mergeSort<T: Comparable>(_ arr: [T]) -> [T] {
 }
 
 func merge<T: Comparable>(_ leftArr: [T], _ rightArr: [T]) -> [T] {
-    
     var leftIndex = 0
     var rightIndex = 0
-    
     var resultsArr = [T]()
-    
     while leftIndex < leftArr.count && rightIndex < rightArr.count {
         let leftElement = leftArr[leftIndex]
         let rightElement = rightArr[rightIndex]
-        
-        // compare
-        
         if leftElement < rightElement {
             resultsArr.append(leftElement)
             leftIndex += 1
@@ -50,17 +44,12 @@ func merge<T: Comparable>(_ leftArr: [T], _ rightArr: [T]) -> [T] {
             rightIndex += 1
         }
     }
-    
-    // out here append elements remaining in left , right arrays
-    
     if leftIndex < leftArr.count {
         resultsArr.append(contentsOf: leftArr[leftIndex...])
     }
-    
     if rightIndex < rightArr.count {
         resultsArr.append(contentsOf: rightArr[rightIndex...])
     }
-    
     return resultsArr
 }
 

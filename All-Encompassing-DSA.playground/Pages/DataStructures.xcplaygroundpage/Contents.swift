@@ -174,8 +174,24 @@ class LinkedList<T: Equatable> {
         return tail
     }
     
+    
 }
 
+func reverse<T>(_ list: LinkedList<T>) -> Node<T>? {
+    
+    var prevNode: Node<T>? = nil
+    var currentNode = list.head
+    var nextNode = list.head?.next
+    
+    while nextNode != nil {
+        currentNode?.next = prevNode
+        prevNode = currentNode
+        currentNode = nextNode
+        nextNode = currentNode?.next
+    }
+    currentNode?.next = prevNode
+    return currentNode
+}
 
 extension LinkedList: CustomStringConvertible {
     var description: String {

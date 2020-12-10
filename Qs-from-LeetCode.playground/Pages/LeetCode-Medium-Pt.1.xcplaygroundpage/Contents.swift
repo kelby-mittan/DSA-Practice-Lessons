@@ -331,6 +331,35 @@ func compress(_ chars: inout [Character]) -> Int {
 var arrToCompress: [Character] = ["a","a","a","b","b","a","a"]
 compress(&arrToCompress)
 
+
+// string compression from cracking the coding interview
+func compressedStr(_ str: String) -> String {
+  let strArr = Array(str)
+
+  guard !str.isEmpty else { return "" }
+    
+  var compressedString = ""
+  var counter = 1
+
+  for i in 1..<strArr.count {
+    if strArr.count > 1 {
+        if strArr[i] == strArr[i-1] {
+        counter += 1
+      } else {
+        compressedString += String(strArr[i-1]) + String(counter)
+        counter = 1
+      }
+    }
+  }
+   if compressedString.count > str.count {
+     return str
+   } else {
+     return compressedString
+   }
+}
+
+print(compressedStr("aaaaaaaaaaaaaaaabbgjckksak"))
+
 //===============================================================================
 
 /*
