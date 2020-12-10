@@ -12,11 +12,11 @@ class BinaryTreeNode {
 }
 
 /*
-          10
-         /  \
-       7     13
-     /  \   /  \
-    5    9 11   16
+ 10
+ /  \
+ 7     13
+ /  \   /  \
+ 5    9 11   16
  */
 
 // insert
@@ -62,28 +62,42 @@ func search(_ root: BinaryTreeNode?, _ value: Int) -> Bool {
 }
 
 func delete(_ root: BinaryTreeNode?, _ value: Int) -> BinaryTreeNode? {
-    
+    // 1.
+    // tree is empty return nil
     guard let root = root else { return nil }
     
+    // 2.
+    // value is less than root, delete and assign leftChild its new value
     if value < root.value {
-        root.left = delete(root.left, value)
+        root.left = delete(root.left, value) // e.g returns nil to 7 node if deleting 5
     }
     
+    // 3.
+    // value is greater than root, delete and assign rightChild's its new value
     else if value > root.value {
         root.right = delete(root.right, value)
     }
     
+    // 4.
+    // value is equal to the roots value
     else {
+        // 5.
+        // one child
         if root.left == nil {
             return root.right
         } else if root.right == nil {
             return root.left
         }
         
+        // 6.
+        // two children
+        // we use a helper function to get the in-order successor e.g if deleting 10 the in-order successor would be 11
+        // we first copy the in-order succsssor to the root
+        // then we delete the value we copied from the right subtree
         root.value = minValue(root.right)
-        
         root.right = delete(root.right, root.value)
     }
+    
     return root
 }
 
@@ -98,11 +112,11 @@ func minValue(_ root: BinaryTreeNode?) -> Int {
 // test binary search tree functionality
 
 /*
-      10
-     /  \
-    7     13
-   /  \   /  \
-  5    9 11   16
+ 10
+ /  \
+ 7     13
+ /  \   /  \
+ 5    9 11   16
  */
 
 let rootNode = insert(nil, 10)
@@ -125,3 +139,27 @@ print("searching...")
 print(search(rootNode, 7)) // true
 print(search(rootNode, 0)) // false
 
+func convertToBST(_ arr: [Int], _ low: Int, _ high: Int, _ root: BinaryTreeNode?) -> BinaryTreeNode? {
+  // 1. - base case when we have one node
+  if low > high {
+    return root
+  }
+  // 2. - calculate the middle index
+  let midIndex = (low + high) / 2
+  
+  // 3. - create the new root from the middle index
+  let root = BinaryTreeNode(arr[midIndex])
+  
+  // 4. - recursively perform conversion on the left subtree
+  root.left = convertToBST(arr, low, midIndex - 1, root.left)
+  
+  // 5. - recursively perform conversion on the right subtree
+  root.right = convertToBST(arr, midIndex + 1, high, root.right)
+  
+  // 6. - return the converted BST
+  return root
+}
+
+let arr = [3, 10, 7, 5, 1].sorted()
+let bst = convertToBST(arr, 0, arr.count - 1, nil)
+inOrderTraversal(bst) // 1 3 5 7 10
