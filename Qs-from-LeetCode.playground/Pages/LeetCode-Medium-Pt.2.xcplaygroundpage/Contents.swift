@@ -263,12 +263,12 @@ func restoreMatrix(_ rowSum: [Int], _ colSum: [Int]) -> [[Int]] {
             row[m] = row[m] - col[n]
             col[n] =  0
             n += 1
-        }else if row[m] < col[n]{
+        } else if row[m] < col[n]{
             ans[m][n] = row[m]
             col[n] = col[n] - row[m]
             row[m] =  0
             m += 1
-        }else {
+        } else {
             ans[m][n] = row[m]
             n += 1
             m += 1

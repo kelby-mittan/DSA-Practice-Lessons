@@ -94,3 +94,29 @@ func staircase(n: Int) -> Void {
 
 staircase(n: 4)
 
+/*
+ N-gram
+ input: "the cow jumped over the moon", n = 2
+ output: ["the cow","cow jumped","jumped over","over the","the moon"
+ */
+
+func nGram(_ str: String, n: Int) -> [String:Int] {
+    let strArr = str.components(separatedBy: " ")
+    var resultArr = [String]()
+    var resultDict = [String:Int]()
+    
+    for i in 0..<strArr.count {
+        if i + n <= strArr.count {
+            let nWords = strArr[i..<i+n].joined(separator: " ")
+            resultArr.append(nWords)
+        }
+    }
+    
+    for phrase in resultArr {
+        resultDict[phrase, default: 0] += 1
+    }
+    
+    return resultDict
+}
+
+print(nGram("the cow jumped over the moon the moon", n: 2))
