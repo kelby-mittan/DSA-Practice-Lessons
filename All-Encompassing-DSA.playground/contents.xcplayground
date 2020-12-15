@@ -18,6 +18,7 @@
         <page name='Graphs-Cam'/>
         <page name='Graphs-with-Louis'/>
         <page name='Graphs-Leetcode'/>
+        <page name='Heap'/>
         <page name='BubbleSort'/>
         <page name='InsertionSort'/>
         <page name='MergeSort'/>
