@@ -163,6 +163,25 @@ struct Heap {
     
 }
 
+class KthLargest {
+  // decalare an instance of the Heap data structure here
+
+  init(_ k: Int, _ nums: [Int]) {
+    // code here
+  }
+
+  func add(_ val: Int) -> Int {
+    // code here
+    return 0
+  }
+}
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * let obj = KthLargest(k, nums)
+ * let ret_1: Int = obj.add(val)
+ */
+
 /*
  2
  /    \
