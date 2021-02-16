@@ -107,8 +107,8 @@ func nGram(_ str: String, n: Int) -> [String:Int] {
     
     for i in 0..<strArr.count {
         if i + n <= strArr.count {
-            let nWords = strArr[i..<i+n].joined(separator: " ")
-            resultArr.append(nWords)
+            let numWords = strArr[i..<i+n].joined(separator: " ")
+            resultArr.append(numWords)
         }
     }
     
@@ -120,3 +120,4 @@ func nGram(_ str: String, n: Int) -> [String:Int] {
 }
 
 print(nGram("the cow jumped over the moon the moon", n: 2))
+

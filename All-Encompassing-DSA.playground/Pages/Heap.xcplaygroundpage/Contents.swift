@@ -121,6 +121,46 @@ struct Heap {
         
         nodes[childIndex] = child
     }
+    
+    public mutating func removeTop() -> Int? {
+      guard !nodes.isEmpty else { return nil }
+
+      if nodes.count == 1 {
+        return nodes.removeLast()
+      }
+
+      let value = nodes[0]
+
+      nodes[0] = nodes.removeLast()
+
+      shiftDown(from: 0, to: nodes.count)
+
+      return value
+    }
+    
+    private mutating func shiftDown(from index: Int, to endIndex: Int) {
+      let leftChildIndex = self.leftChildIndex(index)
+      let rightChildIndex = self.rightChildIndex(index)
+
+      var currentIndex = index
+
+      if leftChildIndex < endIndex && nodes[leftChildIndex] < nodes[currentIndex] {
+        currentIndex = leftChildIndex
+      }
+
+      if rightChildIndex < endIndex && nodes[rightChildIndex] < nodes[currentIndex] {
+        currentIndex = rightChildIndex
+      }
+
+      if currentIndex == index { // no swapping needed
+        return
+      }
+
+      nodes.swapAt(currentIndex, index)
+
+      shiftDown(from: currentIndex, to: endIndex)
+    }
+    
 }
 
 /*
@@ -157,3 +197,6 @@ print(minHeap.peek() ?? -999)
 // arr.reduce(0, +)
 // Heap(>) max, descending
 // Heap(<) min, ascending
+
+// shift up
+

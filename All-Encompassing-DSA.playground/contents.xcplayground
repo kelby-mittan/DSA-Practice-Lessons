@@ -19,6 +19,7 @@
         <page name='Graphs-with-Louis'/>
         <page name='Graphs-Leetcode'/>
         <page name='Heap'/>
+        <page name='Trie'/>
         <page name='BubbleSort'/>
         <page name='InsertionSort'/>
         <page name='MergeSort'/>
