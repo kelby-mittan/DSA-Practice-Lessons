@@ -45,22 +45,24 @@ import Foundation
 
 
 /*
- 2 (0)
- /    \
- 8(1)         21 (2)
- /    \          /  \
- 10(3)  16(4)    30(5)   36(6)
+           2 (0)
+          /    \
+        8(1)         21 (2)
+       /    \          /  \
+     -6(3)  16(4)    30(5)   36(6)
+     /
+ 10(7)
  */
 
 
 struct Heap {
     // data structure for our Heap nodes is an array
-    private var nodes = [2, 8, 21, 10, 16, 30, 36]
+    private var nodes: [Int] = [] //[2, 8, 21, 10, 16, 30, 36]
     
     private var orderingCriteria: (Int,Int) -> Bool
     
     public init(_ sort: @escaping (Int,Int) -> Bool) {
-        self.orderingCriteria = sort
+        self.orderingCriteria = sort // this is either greater than or less than
     }
     
     // get the parent index
@@ -102,10 +104,10 @@ struct Heap {
     
     // insert
     public mutating func insert(_ item: Int) {
-        
         nodes.append(item)
         shiftUp(nodes.count - 1)
     }
+    
     // shift up
     public mutating func shiftUp(_ index: Int) {
         let child = nodes[index]
@@ -132,7 +134,7 @@ struct Heap {
       let value = nodes[0]
 
       nodes[0] = nodes.removeLast()
-
+      print(nodes[0])
       shiftDown(from: 0, to: nodes.count)
 
       return value
@@ -144,11 +146,11 @@ struct Heap {
 
       var currentIndex = index
 
-      if leftChildIndex < endIndex && nodes[leftChildIndex] < nodes[currentIndex] {
+      if leftChildIndex < endIndex && orderingCriteria(nodes[rightChildIndex],nodes[currentIndex]) {
         currentIndex = leftChildIndex
       }
 
-      if rightChildIndex < endIndex && nodes[rightChildIndex] < nodes[currentIndex] {
+        if rightChildIndex < endIndex && orderingCriteria(nodes[rightChildIndex],nodes[currentIndex]) {//nodes[rightChildIndex] < nodes[currentIndex] {
         currentIndex = rightChildIndex
       }
 
@@ -166,14 +168,74 @@ struct Heap {
 class KthLargest {
   // decalare an instance of the Heap data structure here
 
-  init(_ k: Int, _ nums: [Int]) {
-    // code here
-  }
+    let k: Int
+    var nums: [Int] = []
+        
+    init(_ k: Int, _ nums: [Int]) {
+        self.k = k
+        for number in nums {
+            self.add(number)
+        }
+    }
+    
+    func add(_ val: Int) -> Int {
+        // insert the value into the sorted array by binary search method
+        self.putInSortedPlace(val: val)
+        
+        // always keep the sorted array in k length
+        if self.k < self.nums.count { self.nums.remove(at: 0) }
+        
+        return self.nums[0]
+    }
+    
+    func putInSortedPlace(val: Int) {
+        
+        var left = 0
+        var right = self.nums.count - 1
+        var idx = 0
+        
+        while left <= right {
+            let mid = (left + right)/2
+            
+            if self.nums[mid] == val {
+                idx = mid
+                break
+            } else if self.nums[mid] < val {
+                left = mid + 1
+                idx = left
+            } else {
+                right = mid - 1
+            }
+        }
+        
+        self.nums.insert(val, at: idx)
+    }
+}
 
-  func add(_ val: Int) -> Int {
-    // code here
-    return 0
-  }
+class KthLargestHeap {
+    let k: Int
+    var heap = Heap(>)
+    
+    init(_ k: Int, _ nums: [Int]) {
+        self.k = k
+        for num in nums {
+            heap.insert(num)
+            print(heap)
+        }
+    }
+    
+    func add(_ val: Int) {
+        
+    }
+    
+    func getVal() -> Int? {
+        for _ in 0..<k-1 {
+            print(heap.peek())
+            heap.removeTop()
+            print(heap)
+        }
+        return heap.peek()
+    }
 }
 
 /**
@@ -183,14 +245,23 @@ class KthLargest {
  */
 
 /*
- 2
- /    \
- 8      21
- / \    /  \
- 10  16  30   36
+         2
+       /    \
+      21     10
+     / \    /  \
+    30  36  16  15
  */
 
-var minHeap = Heap(<)
+var minHeap = Heap(>)
+
+minHeap.insert(2)
+minHeap.insert(21)
+minHeap.insert(16)
+minHeap.insert(30)
+minHeap.insert(36)
+minHeap.insert(10)
+
+print(KthLargestHeap(3, [2,35,1,17,29]).getVal())
 
 print(minHeap.parentIndex(5)) // 2
 
@@ -206,9 +277,14 @@ print(minHeap.rightChild(6) ?? -999) // nil
 
 print(minHeap.peek() ?? -999) // 2
 
-minHeap.insert(-6)
+//minHeap.insert(-6)
 
 print(minHeap.peek() ?? -999)
+
+
+
+
+print(minHeap)
 
 // Preview
 // +
@@ -219,3 +295,9 @@ print(minHeap.peek() ?? -999)
 
 // shift up
 
+/*
+            -6
+            / \
+           2   21
+          /      \
+ */
