@@ -293,3 +293,160 @@ func birthdayCakeCandles(candles: [Int]) -> Int {
     }
     return highArr.count
 }
+
+/*
+ Given a time in -hour AM/PM format, convert it to military (24-hour) time.
+
+ Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+ - 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+
+ Example
+
+
+ Return '12:01:00'.
+
+
+ Return '00:01:00'.
+
+ Function Description
+
+ Complete the timeConversion function in the editor below. It should return a new string representing the input time in 24 hour format.
+
+ timeConversion has the following parameter(s):
+
+ string s: a time in  hour format
+ Returns
+
+ string: the time in  hour format
+ Input Format
+
+ A single string  that represents a time in -hour clock format (i.e.:  or ).
+
+ Constraints
+
+ All input times are valid
+ Sample Input 0
+
+ 07:05:45PM
+ Sample Output 0
+
+ 19:05:45
+ */
+
+func timeConversion(s: String) -> String {
+    var separatedArr = s.components(separatedBy: ":")
+    var firstDigits = Int(separatedArr.first ?? "0") ?? 0
+    if separatedArr[2].contains("P") && firstDigits < 12 {
+        firstDigits += 12
+    }
+    if firstDigits < 12 {
+        separatedArr[0] = "0" + String(firstDigits)
+    } else if firstDigits > 12 {
+        separatedArr[0] = String(firstDigits)
+    } else if firstDigits == 12 && separatedArr[2].contains("A") {
+        separatedArr[0] = "00"
+    } else {
+        separatedArr[0] = "12"
+    }
+    separatedArr[2].removeLast()
+    separatedArr[2].removeLast()
+    return separatedArr.joined(separator: ":")
+}
+
+timeConversion(s: "12:45:54AM")
+
+/*
+ HackerLand University has the following grading policy:
+
+ Every student receives a  in the inclusive range from  to .
+ Any  less than  is a failing grade.
+ Sam is a professor at the university and likes to round each student's  according to these rules:
+
+ If the difference between the  and the next multiple of  is less than , round  up to the next multiple of .
+ If the value of  is less than , no rounding occurs as the result will still be a failing grade.
+ Examples
+
+  round to  (85 - 84 is less than 3)
+  do not round (result is less than 40)
+  do not round (60 - 57 is 3 or higher)
+ Given the initial value of  for each of Sam's  students, write code to automate the rounding process.
+
+ Function Description
+
+ Complete the function gradingStudents in the editor below.
+
+ gradingStudents has the following parameter(s):
+
+ int grades[n]: the grades before rounding
+ Returns
+
+ int[n]: the grades after rounding as appropriate
+ Input Format
+
+ The first line contains a single integer, , the number of students.
+ Each line  of the  subsequent lines contains a single integer, .
+
+ Constraints
+
+ Sample Input 0
+
+ 4
+ 73
+ 67
+ 38
+ 33
+ Sample Output 0
+
+ 75
+ 67
+ 40
+ 33
+ Explanation 0
+
+ */
+
+func gradingStudents(grades: [Int]) -> [Int] {
+
+    var roundedGrades: [Int] = []
+    
+    for grade in grades {
+        if grade < 38 {
+            roundedGrades.append(grade)
+            continue
+        }
+        if (grade+1) % 5 == 0 {
+            roundedGrades.append(grade+1)
+        } else if (grade+2) % 5 == 0 {
+            roundedGrades.append(grade+2)
+        } else {
+            roundedGrades.append(grade)
+        }
+    }
+    
+    return roundedGrades
+}
+
+gradingStudents(grades: [73,67,38,33])
+
+/*
+ APPLES QUESTION.... Long explanation
+ */
+
+func countApplesAndOranges(s: Int, t: Int, a: Int, b: Int, apples: [Int], oranges: [Int]) -> Void {
+    var dumpApple: [Int] = []
+    var dumpOrange: [Int] = []
+    
+    for val in apples {
+        dumpApple.append(val+a)
+    }
+    
+    for val in oranges {
+        dumpOrange.append(val+b)
+    }
+    
+    let countApple = dumpApple.filter {$0 >= s && $0 <= t}
+    let countOrange = dumpOrange.filter {$0 >= s && $0 <= t}
+    
+    print(countApple.count)
+    print(countOrange.count)
+}
