@@ -190,3 +190,106 @@ func compareTriplets(a: [Int], b: [Int]) -> [Int] {
     
     return [bCount,aCount]
 }
+
+/*
+ Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers. Then print the respective minimum and maximum values as a single line of two space-separated long integers.
+
+ Example
+
+ The minimum sum is  and the maximum sum is . The function prints
+
+ 16 24
+ Function Description
+
+ Complete the miniMaxSum function in the editor below.
+
+ miniMaxSum has the following parameter(s):
+
+ arr: an array of  integers
+ Print
+
+ Print two space-separated integers on one line: the minimum sum and the maximum sum of  of  elements.
+
+ Input Format
+
+ A single line of five space-separated integers.
+
+ Constraints
+
+
+ Output Format
+
+ Print two space-separated long integers denoting the respective minimum and maximum values that can be calculated by summing exactly four of the five integers. (The output can be greater than a 32 bit integer.)
+
+ Sample Input
+
+ 1 2 3 4 5
+ Sample Output
+
+ 10 14
+ */
+
+func miniMaxSum(arr: [Int]) -> Void {
+
+    var minSum = 0
+    var maxSum = 0
+    let sortArr = arr.sorted()
+    for i in 0..<sortArr.count-1 {
+        minSum += sortArr[i]
+    }
+    
+    for i in 1..<sortArr.count {
+        maxSum += sortArr[i]
+    }
+    
+    print("\(minSum) \(maxSum)")
+}
+
+/*
+ You are in charge of the cake for a child's birthday. You have decided the cake will have one candle for each year of their total age. They will only be able to blow out the tallest of the candles. Count how many candles are tallest.
+
+ Example:
+ The maximum height candles are  units high. There are  of them, so return .
+
+ Function Description
+
+ Complete the function birthdayCakeCandles in the editor below.
+
+ birthdayCakeCandles has the following parameter(s):
+
+ int candles[n]: the candle heights
+ Returns
+
+ int: the number of candles that are tallest
+ Input Format
+
+ The first line contains a single integer, , the size of .
+ The second line contains  space-separated integers, where each integer  describes the height of .
+
+ Constraints
+
+ Sample Input 0
+ 4
+ 3 2 1 3
+ 
+ Sample Output 0
+ 2
+ */
+
+func birthdayCakeCandles(candles: [Int]) -> Int {
+    
+    var maxHeight = 0
+    var highArr: [Int] = []
+    
+    for num in candles {
+        if num > maxHeight {
+            maxHeight = num
+        }
+    }
+    for num in candles {
+        if num == maxHeight {
+            highArr.append(num)
+        }
+    }
+    return highArr.count
+}
